@@ -25,7 +25,7 @@ before_script:
     export ALARM_SQL_PDO_MYSQL_TEST_CONFIG='{"alarm":{"sql":{"pdo_mysql":{"adapter":"pdo_mysql","host":"localhost","username":"root","password":"","dbname":"test","charset":"utf-8"}}}}';
     export ALARM_SQL_PDO_PGSQL_TEST_CONFIG='{"alarm":{"sql":{"pdo_pgsql":{"adapter":"pdo_pgsql","username":"postgres","password":"","dbname":"test","charset":"utf-8"}}}}';
   - phpenv config-rm xdebug.ini || echo "XDebug not enabled"
-  - pear install channel://pear.horde.org/Horde_Role
+  - pear install channel://pear.horde.org/Horde_Test
   - pear install package.xml
 script:
   - php $(find test -name AllTests.php)
