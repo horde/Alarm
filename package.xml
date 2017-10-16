@@ -10,7 +10,7 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-05-30</date>
+ <date>2017-10-17</date>
  <version>
   <release>2.2.11</release>
   <api>1.2.0</api>
@@ -28,7 +28,6 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Alarm">
-      <file name="COPYING" role="doc" />
       <file name="UPGRADING" role="doc" />
      </dir> <!-- /doc/Horde/Alarm -->
     </dir> <!-- /doc/Horde -->
@@ -343,6 +342,7 @@
      </dir> <!-- /test/Horde/Alarm -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -438,19 +438,18 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="COPYING" name="doc/Horde/Alarm/COPYING" />
    <install as="UPGRADING" name="doc/Horde/Alarm/UPGRADING" />
    <install as="Horde/Alarm.php" name="lib/Horde/Alarm.php" />
    <install as="Horde/Alarm/Exception.php" name="lib/Horde/Alarm/Exception.php" />
    <install as="Horde/Alarm/Handler.php" name="lib/Horde/Alarm/Handler.php" />
+   <install as="Horde/Alarm/Handler/Desktop.php" name="lib/Horde/Alarm/Handler/Desktop.php" />
+   <install as="Horde/Alarm/Handler/Mail.php" name="lib/Horde/Alarm/Handler/Mail.php" />
+   <install as="Horde/Alarm/Handler/Notify.php" name="lib/Horde/Alarm/Handler/Notify.php" />
    <install as="Horde/Alarm/Null.php" name="lib/Horde/Alarm/Null.php" />
    <install as="Horde/Alarm/Object.php" name="lib/Horde/Alarm/Object.php" />
    <install as="Horde/Alarm/Sql.php" name="lib/Horde/Alarm/Sql.php" />
    <install as="Horde/Alarm/Translation.php" name="lib/Horde/Alarm/Translation.php" />
-   <install as="Horde/Alarm/Handler/Desktop.php" name="lib/Horde/Alarm/Handler/Desktop.php" />
-   <install as="Horde/Alarm/Handler/Mail.php" name="lib/Horde/Alarm/Handler/Mail.php" />
-   <install as="Horde/Alarm/Handler/Notify.php" name="lib/Horde/Alarm/Handler/Notify.php" />
-   <install as="locale/Horde_Alarm.pot" name="locale/Horde_Alarm.pot" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="locale/ar/LC_MESSAGES/Horde_Alarm.mo" name="locale/ar/LC_MESSAGES/Horde_Alarm.mo" />
    <install as="locale/ar/LC_MESSAGES/Horde_Alarm.po" name="locale/ar/LC_MESSAGES/Horde_Alarm.po" />
    <install as="locale/bg/LC_MESSAGES/Horde_Alarm.mo" name="locale/bg/LC_MESSAGES/Horde_Alarm.mo" />
@@ -483,6 +482,7 @@
    <install as="locale/gl/LC_MESSAGES/Horde_Alarm.po" name="locale/gl/LC_MESSAGES/Horde_Alarm.po" />
    <install as="locale/he/LC_MESSAGES/Horde_Alarm.mo" name="locale/he/LC_MESSAGES/Horde_Alarm.mo" />
    <install as="locale/he/LC_MESSAGES/Horde_Alarm.po" name="locale/he/LC_MESSAGES/Horde_Alarm.po" />
+   <install as="locale/Horde_Alarm.pot" name="locale/Horde_Alarm.pot" />
    <install as="locale/hr/LC_MESSAGES/Horde_Alarm.mo" name="locale/hr/LC_MESSAGES/Horde_Alarm.mo" />
    <install as="locale/hr/LC_MESSAGES/Horde_Alarm.po" name="locale/hr/LC_MESSAGES/Horde_Alarm.po" />
    <install as="locale/hu/LC_MESSAGES/Horde_Alarm.mo" name="locale/hu/LC_MESSAGES/Horde_Alarm.mo" />
@@ -1036,7 +1036,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-05-30</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
