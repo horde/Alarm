@@ -28,7 +28,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Alarm">
-      <file name="UPGRADING" role="doc" />
+      <file name="UPGRADING.rst" role="doc" />
      </dir> <!-- /doc/Horde/Alarm -->
     </dir> <!-- /doc/Horde -->
    </dir> <!-- /doc -->
@@ -438,7 +438,7 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="UPGRADING" name="doc/Horde/Alarm/UPGRADING" />
+   <install as="UPGRADING.rst" name="doc/Horde/Alarm/UPGRADING.rst" />
    <install as="Horde/Alarm.php" name="lib/Horde/Alarm.php" />
    <install as="Horde/Alarm/Exception.php" name="lib/Horde/Alarm/Exception.php" />
    <install as="Horde/Alarm/Handler.php" name="lib/Horde/Alarm/Handler.php" />
