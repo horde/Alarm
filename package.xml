@@ -10,7 +10,7 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-17</date>
+ <date>2017-10-20</date>
  <version>
   <release>2.2.11</release>
   <api>1.2.0</api>
@@ -338,7 +338,6 @@
       <file name="bootstrap.php" role="test" />
       <file name="conf.php.dist" role="test" />
       <file name="HandlerTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/Alarm -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -541,7 +540,6 @@
    <install as="Horde/Alarm/bootstrap.php" name="test/Horde/Alarm/bootstrap.php" />
    <install as="Horde/Alarm/conf.php.dist" name="test/Horde/Alarm/conf.php.dist" />
    <install as="Horde/Alarm/HandlerTest.php" name="test/Horde/Alarm/HandlerTest.php" />
-   <install as="Horde/Alarm/phpunit.xml" name="test/Horde/Alarm/phpunit.xml" />
    <install as="Horde/Alarm/Storage/Base.php" name="test/Horde/Alarm/Storage/Base.php" />
    <install as="Horde/Alarm/Storage/NullTest.php" name="test/Horde/Alarm/Storage/NullTest.php" />
    <install as="Horde/Alarm/Storage/ObjectTest.php" name="test/Horde/Alarm/Storage/ObjectTest.php" />
@@ -1036,7 +1034,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-17</date>
+   <date>2017-10-20</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
