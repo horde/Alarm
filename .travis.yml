@@ -23,12 +23,6 @@ before_script:
     export ALARM_SQL_PDO_MYSQL_TEST_CONFIG='{"alarm":{"sql":{"pdo_mysql":{"adapter":"pdo_mysql","host":"localhost","username":"root","password":"","dbname":"test","charset":"utf-8"}}}}';
     export ALARM_SQL_PDO_PGSQL_TEST_CONFIG='{"alarm":{"sql":{"pdo_pgsql":{"adapter":"pdo_pgsql","username":"postgres","password":"","dbname":"test","charset":"utf-8"}}}}';
   - phpenv config-rm xdebug.ini || echo "XDebug not enabled"
-  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ] || [ "$TRAVIS_PHP_VERSION" == "7.0" ];
-    then
-      echo "include_path = .:$HOME/.phpenv/versions/$(phpenv version-name)/lib/php/pear" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-      pear channel-discover pear.horde.org;
-    fi
-
   - pear install channel://pear.horde.org/Horde_Test
   - pear install -a -B package.xml
 script:
