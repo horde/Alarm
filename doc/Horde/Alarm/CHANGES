@@ -1,0 +1,260 @@
+-----------
+v2.2.11-git
+-----------
+
+
+-------
+v2.2.10
+-------
+
+[jan] Fix catching database backend exceptions.
+
+
+------
+v2.2.9
+------
+
+[jan] Return the alarm ID with the getErrors() result.
+
+
+------
+v2.2.8
+------
+
+[jan] Use more efficient database access in SQL backend.
+
+
+------
+v2.2.7
+------
+
+[jan] Update Greek translation (Limperis Antonis <limperis@cti.gr>).
+
+
+------
+v2.2.6
+------
+
+[jan] Mark PHP 7 as supported.
+
+
+------
+v2.2.5
+------
+
+[jan] Updated DE translation.
+[jan] Updated UK translation.
+
+
+------
+v2.2.4
+------
+
+[mms] Fix fatal errors when stored alarm data cannot be unserialized.
+
+
+------
+v2.2.3
+------
+
+[jan] More compatibility fixes for Oracle.
+
+
+------
+v2.2.2
+------
+
+[jan] Update Czech translation (Michael Grafnetter
+      <michael.grafnetter@outlook.com>).
+
+
+------
+v2.2.1
+------
+
+[jan] Test all available SQL backends.
+[jan] Make tests work with PEAR-installed package.
+[jan] Use correct schema table name when running tests.
+
+
+------
+v2.2.0
+------
+
+[mjr] Add support for multiple instances of the same alarm, such as for a
+      recurring event.
+
+
+------
+v2.1.0
+------
+
+[jan] Add getErrors() to return errors from alarm notifications.
+[jan] Catch errors from alarm notifications (Bug #12951).
+[jan] Fix compatibility with Oracle.
+
+
+------
+v2.0.5
+------
+
+[mjr] Fix initializing Alarms when using PDO_Oci or PDO_PostgreSQL.
+
+
+------
+v2.0.4
+------
+
+[jan] Fix unit tests.
+
+
+------
+v2.0.3
+------
+
+[jan] Update Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).
+
+
+------
+v2.0.2
+------
+
+[mms] Use new Horde_Test layout.
+
+
+------
+v2.0.1
+------
+
+[jan] Update Dutch translation (Arjen de Korte <build+horde@de-korte.org>).
+
+
+------
+v2.0.0
+------
+
+First stable release for Horde 5.
+[jan] Update Polish translation (Krzysztof Kozera <krzysztof113@o2.pl>).
+
+
+---------
+v2.0.0RC1
+---------
+
+[mjr] Fix a bug that broke Desktop Notifications.
+
+
+-----------
+v2.0.0beta2
+-----------
+
+[jan] Fix Desktop notifications (Bug #10810).
+
+
+-----------
+v2.0.0beta1
+-----------
+
+First beta release for Horde 5.
+
+
+------------
+v2.0.0alpha1
+------------
+
+First alpha release for Horde 5.
+
+
+------
+v1.0.8
+------
+
+[mjr] Fix issue that prevented Desktop Notifications from displaying.
+
+
+------
+v1.0.7
+------
+
+[jan] Catch exceptions from Horde_Mime when sending alarm messages (Bug
+      #10388).
+
+
+------
+v1.0.6
+------
+
+[jan] Update Estonian translation.
+
+
+------
+v1.0.5
+------
+
+[jan] Update Croatian translation.
+
+
+------
+v1.0.4
+------
+
+[jan] Update Latvian translation.
+
+
+------
+v1.0.3
+------
+
+[jan] Update Lithuanian translation.
+[jan] Update Brazilian Portuguese translation.
+
+
+------
+v1.0.2
+------
+
+[jan] Updated Slovak translation.
+
+
+------
+v1.0.1
+------
+
+[jan] Updated Spanish translation.
+
+
+------
+v1.0.0
+------
+
+First stable release for Horde 4.
+[jan] Remove last bits of Core dependency.
+
+
+---------
+v1.0.0RC2
+---------
+
+Second release candidate for Horde 4.
+[jan] Fix fatal error in desktop notifications (Bug #9727).
+
+
+---------
+v1.0.0RC1
+---------
+
+First release candidate for Horde 4.
+
+
+-----------
+v1.0.0beta1
+-----------
+
+First beta release for Horde 4.
+
+
+------------
+v1.0.0alpha1
+------------
+
+First alpha release for Horde 4.

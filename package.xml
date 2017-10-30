@@ -10,7 +10,7 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-05-30</date>
+ <date>2017-10-30</date>
  <version>
   <release>2.2.11</release>
   <api>1.2.0</api>
@@ -28,6 +28,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Alarm">
+      <file name="CHANGES" role="doc" />
       <file name="COPYING" role="doc" />
       <file name="UPGRADING" role="doc" />
      </dir> <!-- /doc/Horde/Alarm -->
@@ -438,6 +439,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Alarm/CHANGES" />
    <install as="COPYING" name="doc/Horde/Alarm/COPYING" />
    <install as="UPGRADING" name="doc/Horde/Alarm/UPGRADING" />
    <install as="Horde/Alarm.php" name="lib/Horde/Alarm.php" />
@@ -1036,7 +1038,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-05-30</date>
+   <date>2017-10-30</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
