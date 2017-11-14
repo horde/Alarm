@@ -341,7 +341,6 @@
       <file name="bootstrap.php" role="test" />
       <file name="conf.php.dist" role="test" />
       <file name="HandlerTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/Alarm -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -544,7 +543,6 @@
    <install as="Horde/Alarm/bootstrap.php" name="test/Horde/Alarm/bootstrap.php" />
    <install as="Horde/Alarm/conf.php.dist" name="test/Horde/Alarm/conf.php.dist" />
    <install as="Horde/Alarm/HandlerTest.php" name="test/Horde/Alarm/HandlerTest.php" />
-   <install as="Horde/Alarm/phpunit.xml" name="test/Horde/Alarm/phpunit.xml" />
    <install as="Horde/Alarm/Storage/Base.php" name="test/Horde/Alarm/Storage/Base.php" />
    <install as="Horde/Alarm/Storage/NullTest.php" name="test/Horde/Alarm/Storage/NullTest.php" />
    <install as="Horde/Alarm/Storage/ObjectTest.php" name="test/Horde/Alarm/Storage/ObjectTest.php" />
