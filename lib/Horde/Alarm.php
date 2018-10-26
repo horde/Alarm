@@ -496,7 +496,7 @@ abstract class Horde_Alarm
                     $this->addHandler($handler, new $class());
                 }
             }
-            $this->_handlerLoaded = true;
+            $this->_handlersLoaded = true;
         }
 
         return $this->_handlers;
