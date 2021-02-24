@@ -39,9 +39,6 @@
     "autoload": {
         "psr-0": {
             "Horde_Alarm": "lib/"
-        },
-        "psr-4": {
-            "Horde\\Alarm\\": "src/"
         }
     }
 }
