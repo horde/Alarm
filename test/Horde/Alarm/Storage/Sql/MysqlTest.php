@@ -6,9 +6,12 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-class Horde_Alarm_Storage_Sql_MysqlTest extends Horde_Alarm_Storage_Sql_Base
+namespace Horde\Alarm\Storage\Sql;
+use Horde_Alarm_Storage_Sql_Base as Base;
+
+class MysqlTest extends Base
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('mysql')) {
             self::$reason = 'No mysql extension';

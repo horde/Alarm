@@ -6,14 +6,24 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+namespace Horde\Alarm;
+use PHPUnit\Framework\TestCase;
+use \Horde_Alarm_Object;
+use \Horde_Date;
+use \Horde_Notification_Storage_Object;
+use \Horde_Alarm_Handler_Notify;
+use \Horde_Alarm_Handler_Desktop;
+use \Horde_Mail_Transport_Mock;
+use \Horde_Alarm_Handler_Mail;
+use \Horde_Notification_Handler;
 
-class Horde_Alarm_HandlerTest extends PHPUnit_Framework_TestCase
+class HandlerTest extends TestCase
 {
     protected static $alarm;
     protected static $storage;
     protected static $mail;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('Horde_Notification')) {
             $this->markTestSkipped('Horde_Notification not installed');

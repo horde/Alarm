@@ -12,7 +12,7 @@ abstract class Horde_Alarm_Storage_Base extends Horde_Test_Case
     protected static $date;
     protected static $end;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $now = time();
         self::$date = new Horde_Date($now);
