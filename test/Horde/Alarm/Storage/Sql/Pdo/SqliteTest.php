@@ -6,11 +6,11 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm\Storage\Pdo\Sql;
-use Horde_Alarm_Storage_Sql_Base as Base;
+namespace Horde\Alarm\Storage\Sql\Pdo;
+use Horde\Alarm\Storage\Sql\BaseTestCase;
 use \Horde_Test_Factory_Db;
 
-class SqliteTest extends Base
+class SqliteTest extends BaseTestCase
 {
     public static function setUpBeforeClass(): void
     {

@@ -7,9 +7,8 @@
  * @subpackage UnitTests
  */
 namespace Horde\Alarm\Storage\Sql;
-use Horde_Alarm_Storage_Sql_Base as Base;
 
-class Oci8Test extends Base
+class Oci8Test extends BaseTestCase
 {
     public static function setUpBeforeClass(): void
     {

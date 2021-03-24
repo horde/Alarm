@@ -7,11 +7,10 @@
  * @subpackage UnitTests
  */
 namespace Horde\Alarm\Storage;
-use Horde_Alarm_Storage_Base as Base;
 use \Horde_Alarm_Object;
 use \PDO;
 
-class ObjectTest extends Base
+class ObjectTest extends BaseTestCase
 {
     public function testFactory()
     {

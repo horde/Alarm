@@ -6,7 +6,14 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-abstract class Horde_Alarm_Storage_Sql_Base extends Horde_Alarm_Storage_Base
+namespace Horde\Alarm\Storage\Sql;
+use Horde\Alarm\Storage\BaseTestCase as ExtBaseTestCase;
+use \Horde_Log_Logger;
+use \Horde_Log_Handler_Cli;
+use \Horde_Db_Migration_Migrator;
+use \Horde_Alarm_Sql;
+
+abstract class BaseTestCase extends ExtBaseTestCase
 {
     protected static $db;
     protected static $migrator;

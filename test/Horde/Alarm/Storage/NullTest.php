@@ -7,10 +7,9 @@
  * @subpackage UnitTests
  */
 namespace Horde\Alarm\Storage;
-use Horde_Alarm_Storage_Base as Base;
 use \Horde_Alarm_Null;
 
-class NullTest extends Base
+class NullTest extends BaseTestCase
 {
     public function testFactory()
     {
