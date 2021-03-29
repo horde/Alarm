@@ -6,7 +6,11 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-abstract class Horde_Alarm_Storage_Base extends Horde_Test_Case
+namespace Horde\Alarm\Storage;
+use Horde_Test_Case as TestCase;
+use \Horde_Date;
+
+abstract class BaseTestCase extends TestCase
 {
     protected static $alarm;
     protected static $date;
