@@ -6,15 +6,13 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm\Storage;
-use \Horde_Alarm_Object;
-use \PDO;
+namespace Horde\Alarm\Test\Unnamespaced;
+use Horde_Alarm_Object;
 
-class ObjectTest extends BaseTestCase
+class StorageObjectTest extends StorageTestBase
 {
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Object();
-        $this->markTestIncomplete();
     }
 }

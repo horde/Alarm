@@ -1,5 +1,4 @@
 {
-    "minimum-stability": "dev",
     "name": "horde/alarm",
     "description": "Alarm library",
     "type": "library",
@@ -12,11 +11,11 @@
             "role": "lead"
         }
     ],
-    "time": "2021-03-13",
+    "time": "2022-11-03",
     "repositories": [
         {
             "type": "composer",
-            "url": "https://horde-satis.maintaina.com/"
+            "url": "https://horde-satis.maintaina.com"
         }
     ],
     "require": {
@@ -25,7 +24,7 @@
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
         "horde/translation": "^3 || dev-FRAMEWORK_6_0"
     },
-    "suggest": {
+    "require-dev": {
         "horde/db": "^3 || dev-FRAMEWORK_6_0",
         "horde/log": "^3 || dev-FRAMEWORK_6_0",
         "horde/mail": "^3 || dev-FRAMEWORK_6_0",
@@ -35,9 +34,29 @@
         "horde/prefs": "^3 || dev-FRAMEWORK_6_0",
         "horde/test": "^3 || dev-FRAMEWORK_6_0"
     },
+    "suggest": {
+        "horde/db": "^3 || dev-FRAMEWORK_6_0",
+        "horde/log": "^3 || dev-FRAMEWORK_6_0",
+        "horde/mail": "^3 || dev-FRAMEWORK_6_0",
+        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
+        "horde/notification": "^3 || dev-FRAMEWORK_6_0",
+        "horde/perms": "^3 || dev-FRAMEWORK_6_0",
+        "horde/prefs": "^3 || dev-FRAMEWORK_6_0"
+    },
     "autoload": {
         "psr-0": {
             "Horde_Alarm": "lib/"
         }
-    }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Horde\\Alarm\\Test\\": "test/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "horde/horde-installer-plugin": true
+        }
+    },
+    "minimum-stability": "dev"
 }

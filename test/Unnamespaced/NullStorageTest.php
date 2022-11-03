@@ -6,15 +6,12 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm\Storage;
-use \Horde_Alarm_Null;
-
-class NullTest extends BaseTestCase
+namespace Horde\Alarm\Test\Unnamespaced;
+class NullStorageTest extends Horde_Alarm_Storage_Base
 {
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Null();
-        $this->markTestIncomplete();
     }
 
     /**

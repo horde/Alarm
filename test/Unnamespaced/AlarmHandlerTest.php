@@ -6,24 +6,25 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm;
+namespace Horde\Alarm\Test\Unnamespaced;
 use PHPUnit\Framework\TestCase;
-use \Horde_Alarm_Object;
-use \Horde_Date;
-use \Horde_Notification_Storage_Object;
-use \Horde_Alarm_Handler_Notify;
-use \Horde_Alarm_Handler_Desktop;
-use \Horde_Mail_Transport_Mock;
-use \Horde_Alarm_Handler_Mail;
-use \Horde_Notification_Handler;
+use Horde_Alarm_Object;
+use Horde_Date;
+use Horde_Notification_Storage_Object;
+use Horde_Alarm_HandlerTest_NotificationFactory;
+use Horde_Alarm_Handler_Notify;
+use Horde_Alarm_Handler_Desktop;
+use Horde_Mail_Transport_Mock;
+use Horde_Alarm_HandlerTest_IdentityFactory;
+use Horde_Alarm_Handler_Mail;
 
-class HandlerTest extends TestCase
+class AlarmHandlerTest extends TestCase
 {
     protected static $alarm;
     protected static $storage;
     protected static $mail;
 
-    public function setUp(): void
+    public function setUp()
     {
         if (!class_exists('Horde_Notification')) {
             $this->markTestSkipped('Horde_Notification not installed');
@@ -128,36 +129,5 @@ MIME-Version: 1.0';
         $this->assertEquals(
             "if(window.webkitNotifications)(function(){function show(){switch(window.webkitNotifications.checkPermission()){case 0:var notify=window.webkitNotifications.createNotification(\"test.png\",\"This is a personal alarm.\",\"Action is required.\");notify.show();(function(){notify.cancel()}).delay(5);break;case 1:window.webkitNotifications.requestPermission(function(){});break}}show()})()",
             $js);
-    }
-}
-
-class Horde_Alarm_HandlerTest_IdentityFactory
-{
-    public function create()
-    {
-        return new Horde_Alarm_HandlerTest_Identity();
-    }
-}
-
-class Horde_Alarm_HandlerTest_Identity
-{
-    public function getDefaultFromAddress()
-    {
-        return 'john@example.com';
-    }
-}
-
-class Horde_Alarm_HandlerTest_NotificationFactory
-{
-    private $storage;
-
-    public function __construct($storage)
-    {
-        $this->storage = $storage;
-    }
-
-    public function create()
-    {
-        return new Horde_Notification_Handler($this->storage);
     }
 }
