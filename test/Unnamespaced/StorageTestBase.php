@@ -6,13 +6,17 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-abstract class Horde_Alarm_Storage_Base extends Horde_Test_Case
+namespace Horde\Alarm\Test\Unnamespaced;
+use Horde\Test\TestCase;
+use Horde_Date;
+
+abstract class StorageTestBase extends TestCase
 {
     protected static $alarm;
     protected static $date;
     protected static $end;
 
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         $now = time();
         self::$date = new Horde_Date($now);

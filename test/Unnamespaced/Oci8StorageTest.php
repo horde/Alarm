@@ -6,11 +6,11 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm\Storage\Sql;
+namespace Horde\Alarm\Test\Unnamespaced;
 
-class Oci8Test extends BaseTestCase
+class Oci8StorageTest extends Horde_Alarm_Storage_Sql_Base
 {
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         if (!extension_loaded('oci8')) {
             self::$reason = 'No oci8 extension';

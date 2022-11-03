@@ -5,14 +5,13 @@
  * @category   Horde
  * @package    Alarm
  * @subpackage UnitTests
+ *
  */
-namespace Horde\Alarm\Storage\Sql\Pdo;
-use Horde\Alarm\Storage\Sql\BaseTestCase;
-use \Horde_Test_Factory_Db;
+namespace Horde\Alarm\Test\Unnamespaced;
 
-class SqliteTest extends BaseTestCase
+class Horde_Alarm_Storage_Sql_Pdo_SqliteTest extends Horde_Alarm_Storage_Sql_Base
 {
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         $factory_db = new Horde_Test_Factory_Db();
 

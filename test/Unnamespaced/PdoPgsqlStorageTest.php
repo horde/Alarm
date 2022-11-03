@@ -6,13 +6,11 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm\Storage\Sql\Pdo;
-use Horde\Alarm\Storage\Sql\BaseTestCase;
-use \PDO;
+namespace Horde\Alarm\Test\Unnamespaced;
 
-class PgsqlTest extends BaseTestCase
+class Horde_Alarm_Storage_Sql_Pdo_PgsqlTest extends Horde_Alarm_Storage_Sql_Base
 {
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         if (!extension_loaded('pdo') ||
             !in_array('pgsql', PDO::getAvailableDrivers())) {

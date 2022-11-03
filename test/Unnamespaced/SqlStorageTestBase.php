@@ -6,20 +6,20 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
-namespace Horde\Alarm\Storage\Sql;
-use Horde\Alarm\Storage\BaseTestCase as ExtBaseTestCase;
-use \Horde_Log_Logger;
-use \Horde_Log_Handler_Cli;
-use \Horde_Db_Migration_Migrator;
-use \Horde_Alarm_Sql;
+namespace Horde\Alarm\Test\Unnamespaced;
+use Horde_Log_Logger;
+use Horde_Log_Handler_Cli;
+use Horde_Db_Migration_Migrator;
+use Horde_Alarm_Sql;
+use Horde_Date;
 
-abstract class BaseTestCase extends ExtBaseTestCase
+abstract class SqlStorageTestBase extends StorageTestBase
 {
     protected static $db;
     protected static $migrator;
     protected static $reason;
 
-    public static function setUpBeforeClass(): void
+    public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
 
@@ -41,7 +41,7 @@ abstract class BaseTestCase extends ExtBaseTestCase
         self::$migrator->up();
     }
 
-    public static function tearDownAfterClass(): void
+    public static function tearDownAfterClass()
     {
         if (self::$migrator) {
             self::$migrator->down();
@@ -52,7 +52,7 @@ abstract class BaseTestCase extends ExtBaseTestCase
         self::$db = self::$migrator = null;
     }
 
-    public function setUp(): void
+    public function setUp()
     {
         if (!self::$db) {
             $this->markTestSkipped(self::$reason);
@@ -65,8 +65,6 @@ abstract class BaseTestCase extends ExtBaseTestCase
         self::$alarm = new Horde_Alarm_Sql(array('db' => self::$db, 'charset' => 'UTF-8'));
         self::$alarm->initialize();
         self::$alarm->gc(true);
-
-        $this->markTestIncomplete();
     }
 
     /**
