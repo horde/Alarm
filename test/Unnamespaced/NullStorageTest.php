@@ -7,11 +7,15 @@
  * @subpackage UnitTests
  */
 namespace Horde\Alarm\Test\Unnamespaced;
-class NullStorageTest extends Horde_Alarm_Storage_Base
+use Horde_Alarm_Null;
+use Horde_Alarm_Exception;
+
+class NullStorageTest extends StorageTestBase
 {
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Null();
+        $this->assertInstanceOf(Horde_Alarm_Null::class, self::$alarm);
     }
 
     /**
@@ -24,10 +28,10 @@ class NullStorageTest extends Horde_Alarm_Storage_Base
 
     /**
      * @depends testFactory
-     * @expectedException Horde_Alarm_Exception
      */
     public function testGet()
     {
+        $this->expectException(Horde_Alarm_Exception::class);
         $alarm = self::$alarm->get('personalalarm', 'john');
     }
 
@@ -36,6 +40,7 @@ class NullStorageTest extends Horde_Alarm_Storage_Base
      */
     public function testUpdate($alarm)
     {
+        $this->markTestIncomplete();
     }
 
     /**

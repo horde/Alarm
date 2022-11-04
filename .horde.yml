@@ -41,6 +41,7 @@ dependencies:
       horde/prefs: ^3
   dev:
     composer:
+      horde/cli: ^3
       horde/db: ^3
       horde/log: ^3
       horde/mail: ^3
@@ -48,4 +49,5 @@ dependencies:
       horde/notification: ^3
       horde/perms: ^3
       horde/prefs: ^3
+      horde/serialize: ^3
       horde/test: ^3

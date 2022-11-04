@@ -9,9 +9,9 @@
 namespace Horde\Alarm\Test\Unnamespaced;
 use Horde_Db_Adapter_Mysqli;
 
-class MysqliStorageTest extends Horde_Alarm_Storage_Sql_Base
+class MysqliStorageTest extends SqlStorageTestBase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('mysqli')) {
             self::$reason = 'No mysqli extension';

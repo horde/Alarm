@@ -33,7 +33,9 @@
         "horde/notification": "^3 || dev-FRAMEWORK_6_0",
         "horde/perms": "^3 || dev-FRAMEWORK_6_0",
         "horde/prefs": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0"
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "horde/serialize": "^3 || dev-FRAMEWORK_6_0",
+        "horde/cli": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
         "horde/db": "^3 || dev-FRAMEWORK_6_0",

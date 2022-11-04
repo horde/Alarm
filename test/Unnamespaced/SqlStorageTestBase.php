@@ -12,6 +12,7 @@ use Horde_Log_Handler_Cli;
 use Horde_Db_Migration_Migrator;
 use Horde_Alarm_Sql;
 use Horde_Date;
+use PEAR_Config;
 
 abstract class SqlStorageTestBase extends StorageTestBase
 {
@@ -19,13 +20,13 @@ abstract class SqlStorageTestBase extends StorageTestBase
     protected static $migrator;
     protected static $reason;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
         $logger = new Horde_Log_Logger(new Horde_Log_Handler_Cli());
         //self::$db->setLogger($logger);
-        $dir = __DIR__ . '/../../../../../migration/Horde/Alarm';
+        $dir = __DIR__ . '/../../migration/Horde/Alarm';
         if (!is_dir($dir)) {
             error_reporting(E_ALL & ~E_DEPRECATED);
             $dir = PEAR_Config::singleton()
@@ -41,7 +42,7 @@ abstract class SqlStorageTestBase extends StorageTestBase
         self::$migrator->up();
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         if (self::$migrator) {
             self::$migrator->down();
@@ -52,7 +53,7 @@ abstract class SqlStorageTestBase extends StorageTestBase
         self::$db = self::$migrator = null;
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!self::$db) {
             $this->markTestSkipped(self::$reason);
@@ -63,6 +64,7 @@ abstract class SqlStorageTestBase extends StorageTestBase
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Sql(array('db' => self::$db, 'charset' => 'UTF-8'));
+        $this->assertInstanceOf(Horde_Alarm_Sql::class, self::$alarm);
         self::$alarm->initialize();
         self::$alarm->gc(true);
     }

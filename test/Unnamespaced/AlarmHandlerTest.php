@@ -11,12 +11,13 @@ use PHPUnit\Framework\TestCase;
 use Horde_Alarm_Object;
 use Horde_Date;
 use Horde_Notification_Storage_Object;
-use Horde_Alarm_HandlerTest_NotificationFactory;
 use Horde_Alarm_Handler_Notify;
 use Horde_Alarm_Handler_Desktop;
 use Horde_Mail_Transport_Mock;
-use Horde_Alarm_HandlerTest_IdentityFactory;
 use Horde_Alarm_Handler_Mail;
+use Horde\Alarm\Test\Helper\NotificationFactory;
+use Horde\Alarm\Test\Helper\IdentityFactory;
+use Horde\Alarm\Test\Helper\Identity;
 
 class AlarmHandlerTest extends TestCase
 {
@@ -24,7 +25,7 @@ class AlarmHandlerTest extends TestCase
     protected static $storage;
     protected static $mail;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('Horde_Notification')) {
             $this->markTestSkipped('Horde_Notification not installed');
@@ -48,7 +49,7 @@ class AlarmHandlerTest extends TestCase
         self::$alarm->set($hash);
 
         self::$storage = new Horde_Notification_Storage_Object();
-        $notification = new Horde_Alarm_HandlerTest_NotificationFactory(self::$storage);
+        $notification = new NotificationFactory(self::$storage);
         $handler = new Horde_Alarm_Handler_Notify(array('notification' => $notification));
         self::$alarm->addHandler('notify', $handler);
 
@@ -56,7 +57,7 @@ class AlarmHandlerTest extends TestCase
         self::$alarm->addHandler('desktop', $handler);
 
         self::$mail = new Horde_Mail_Transport_Mock();
-        $factory = new Horde_Alarm_HandlerTest_IdentityFactory();
+        $factory = new IdentityFactory();
         $handler = new Horde_Alarm_Handler_Mail(array('mail' => self::$mail, 'identity' => $factory, 'charset' => 'us-ascii'));
         self::$alarm->addHandler('mail', $handler);
     }

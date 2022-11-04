@@ -9,6 +9,7 @@
 namespace Horde\Alarm\Test\Unnamespaced;
 use Horde\Test\TestCase;
 use Horde_Date;
+use Horde_Alarm_Exception;
 
 abstract class StorageTestBase extends TestCase
 {
@@ -16,7 +17,7 @@ abstract class StorageTestBase extends TestCase
     protected static $date;
     protected static $end;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $now = time();
         self::$date = new Horde_Date($now);
@@ -37,7 +38,7 @@ abstract class StorageTestBase extends TestCase
                       'methods' => array(),
                       'params' => array('foo' => str_repeat('X', 5000)),
                       'title' => 'This is a personal alarm.');
-        self::$alarm->set($hash);
+        $this->assertNull(self::$alarm->set($hash));
     }
 
     /**
@@ -54,7 +55,7 @@ abstract class StorageTestBase extends TestCase
     public function testGet()
     {
         $alarm = self::$alarm->get('personalalarm', 'john');
-        $this->assertInternalType('array', $alarm);
+        $this->assertIsArray($alarm);
         $this->assertEquals('personalalarm', $alarm['id']);
         $this->assertEquals('john', $alarm['user']);
         $this->assertEquals(array(), $alarm['methods']);
@@ -75,7 +76,7 @@ abstract class StorageTestBase extends TestCase
     public function testUpdate($alarm)
     {
         $alarm['title'] = 'Changed alarm text';
-        self::$alarm->set($alarm);
+        $this->assertNull(self::$alarm->set($alarm));
     }
 
     /**
@@ -110,10 +111,10 @@ abstract class StorageTestBase extends TestCase
 
     /**
      * @depends testDelete
-     * @expectedException Horde_Alarm_Exception
      */
     public function testSnoozeException()
     {
+        $this->expectException(Horde_Alarm_Exception::class);
         self::$alarm->snooze('personalalarm', 'jane', 30);
     }
 
@@ -159,10 +160,13 @@ abstract class StorageTestBase extends TestCase
 
     /**
      * @depends testAlarmWithoutEnd
+     * 
+     * TODO: This should not be modeled as a test
      */
     public function testCleanUp()
     {
         self::$alarm->delete('noend', 'john');
-        self::$alarm->delete('personalalarm', 'john');
+        // Linter cries but PHPUnit is happy. 
+        $this->assertNull(self::$alarm->delete('personalalarm', 'john'));
     }
 }
