@@ -7,13 +7,13 @@
  * @subpackage UnitTests
  */
 
-class Horde_Alarm_HandlerTest extends PHPUnit_Framework_TestCase
+class Horde_Alarm_HandlerTest extends Horde_Test_Case
 {
     protected static $alarm;
     protected static $storage;
     protected static $mail;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!class_exists('Horde_Notification')) {
             $this->markTestSkipped('Horde_Notification not installed');

@@ -11,6 +11,7 @@ class Horde_Alarm_Storage_NullTest extends Horde_Alarm_Storage_Base
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Null();
+        $this->assertIsObject(self::$alarm);
     }
 
     /**
@@ -23,10 +24,10 @@ class Horde_Alarm_Storage_NullTest extends Horde_Alarm_Storage_Base
 
     /**
      * @depends testFactory
-     * @expectedException Horde_Alarm_Exception
      */
     public function testGet()
     {
+        $this->expectException('Horde_Alarm_Exception');
         $alarm = self::$alarm->get('personalalarm', 'john');
     }
 
@@ -35,6 +36,7 @@ class Horde_Alarm_Storage_NullTest extends Horde_Alarm_Storage_Base
      */
     public function testUpdate($alarm)
     {
+        $this->assertTrue(true);
     }
 
     /**

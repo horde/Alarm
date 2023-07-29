@@ -8,7 +8,7 @@
  */
 class Horde_Alarm_Storage_Sql_Pdo_PgsqlTest extends Horde_Alarm_Storage_Sql_Base
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('pdo') ||
             !in_array('pgsql', PDO::getAvailableDrivers())) {

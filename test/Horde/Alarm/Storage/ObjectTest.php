@@ -11,5 +11,6 @@ class Horde_Alarm_Storage_ObjectTest extends Horde_Alarm_Storage_Base
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Object();
+        $this->assertIsObject(self::$alarm);
     }
 }

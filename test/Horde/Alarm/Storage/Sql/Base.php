@@ -12,7 +12,7 @@ abstract class Horde_Alarm_Storage_Sql_Base extends Horde_Alarm_Storage_Base
     protected static $migrator;
     protected static $reason;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
@@ -34,7 +34,7 @@ abstract class Horde_Alarm_Storage_Sql_Base extends Horde_Alarm_Storage_Base
         self::$migrator->up();
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         if (self::$migrator) {
             self::$migrator->down();
@@ -45,7 +45,7 @@ abstract class Horde_Alarm_Storage_Sql_Base extends Horde_Alarm_Storage_Base
         self::$db = self::$migrator = null;
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!self::$db) {
             $this->markTestSkipped(self::$reason);
@@ -56,6 +56,7 @@ abstract class Horde_Alarm_Storage_Sql_Base extends Horde_Alarm_Storage_Base
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Sql(array('db' => self::$db, 'charset' => 'UTF-8'));
+        $this->assertIsObject(self::$alarm);
         self::$alarm->initialize();
         self::$alarm->gc(true);
     }

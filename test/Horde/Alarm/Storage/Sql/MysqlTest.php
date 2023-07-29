@@ -8,7 +8,7 @@
  */
 class Horde_Alarm_Storage_Sql_MysqlTest extends Horde_Alarm_Storage_Sql_Base
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('mysql')) {
             self::$reason = 'No mysql extension';
