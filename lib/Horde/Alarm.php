@@ -21,6 +21,7 @@
  * @license   http://www.horde.org/licenses/lgpl21 LGPL-2.1
  * @package   Alarm
  */
+#[\AllowDynamicProperties]
 abstract class Horde_Alarm
 {
     /**
