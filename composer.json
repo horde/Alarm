@@ -13,12 +13,6 @@
     ],
     "version": "2.2.11",
     "time": "2017-11-11",
-    "repositories": [
-        {
-            "type": "pear",
-            "url": "https://pear.horde.org"
-        }
-    ],
     "require": {
         "php": "^5.3 || ^7",
         "pear-pear.horde.org/Horde_Date": "^2",
