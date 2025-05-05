@@ -26,23 +26,25 @@
         "horde/mail": "^3",
         "horde/mime": "^3",
         "horde/notification": "^3",
-        "horde/perms": "^3",
-        "horde/prefs": "^3",
         "horde/serialize": "^3",
-        "horde/test": "^3"
+        "horde/test": "^3",
+        "phpunit/phpunit": "^12 || ^11 || ^10 || ^9",
+        "phpstan/phpstan": "^2",
+        "friendsofphp/php-cs-fixer": "^3"
     },
     "suggest": {
         "horde/db": "^3",
         "horde/log": "^3",
         "horde/mail": "^3",
         "horde/mime": "^3",
-        "horde/notification": "^3",
-        "horde/perms": "^3",
-        "horde/prefs": "^3"
+        "horde/notification": "^3"
     },
     "autoload": {
         "psr-0": {
             "Horde_Alarm": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Alarm\\": "src/"
         }
     },
     "autoload-dev": {
