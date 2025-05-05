@@ -10,6 +10,11 @@
 
 This lists the API changes between releases of the package.
 
+Upgrading to 3.0.0
+==================
+  - Horde_Alarm
+    - Use the conservative, PSR-0 interface in lib/ to facilitate upgrading to PHP 8.x versions. This interface will be dropped in later versions.
+    - Switch to more type-heavy PSR-4 interface in src/ on your next major revision. All feature development goes here.
 
 Upgrading to 2.2.9
 ==================
