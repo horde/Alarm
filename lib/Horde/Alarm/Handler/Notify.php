@@ -47,7 +47,7 @@ class Horde_Alarm_Handler_Notify extends Horde_Alarm_Handler
      *
      * @throws Horde_Alarm_Exception
      */
-    public function __construct(array $params = null)
+    public function __construct(?array $params = null)
     {
         if (!isset($params['notification'])) {
             throw new Horde_Alarm_Exception('Parameter \'notification\' missing.');

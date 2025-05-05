@@ -103,7 +103,7 @@ abstract class Horde_Alarm
      * @return array  A list of alarm hashes.
      * @throws Horde_Alarm_Exception
      */
-    public function listAlarms($user = null, Horde_Date $time = null,
+    public function listAlarms($user = null, ?Horde_Date $time = null,
                                $load = false, $preload = true)
     {
         if (empty($time)) {
@@ -358,7 +358,7 @@ abstract class Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    public function isSnoozed($id, $user, Horde_Date $time = null)
+    public function isSnoozed($id, $user, ?Horde_Date $time = null)
     {
         if (is_null($time)) {
             $time = new Horde_Date(time());
