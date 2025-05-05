@@ -1,5 +1,4 @@
 {
-    "minimum-stability": "dev",
     "name": "horde/alarm",
     "description": "Alarm library",
     "type": "library",
@@ -12,39 +11,34 @@
             "role": "lead"
         }
     ],
-    "time": "2022-11-03",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://horde-satis.maintaina.com"
-        }
-    ],
+    "time": "2025-05-05",
+    "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
-        "horde/date": "^3 || dev-FRAMEWORK_6_0",
-        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
-        "horde/translation": "^3 || dev-FRAMEWORK_6_0"
+        "horde/date": "^3",
+        "horde/exception": "^3",
+        "horde/translation": "^3"
     },
     "require-dev": {
-        "horde/db": "^3 || dev-FRAMEWORK_6_0",
-        "horde/log": "^3 || dev-FRAMEWORK_6_0",
-        "horde/mail": "^3 || dev-FRAMEWORK_6_0",
-        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
-        "horde/notification": "^3 || dev-FRAMEWORK_6_0",
-        "horde/perms": "^3 || dev-FRAMEWORK_6_0",
-        "horde/prefs": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
-        "horde/serialize": "^3 || dev-FRAMEWORK_6_0",
-        "horde/cli": "^3 || dev-FRAMEWORK_6_0"
+        "horde/cli": "^3",
+        "horde/db": "^3",
+        "horde/log": "^3",
+        "horde/mail": "^3",
+        "horde/mime": "^3",
+        "horde/notification": "^3",
+        "horde/perms": "^3",
+        "horde/prefs": "^3",
+        "horde/serialize": "^3",
+        "horde/test": "^3"
     },
     "suggest": {
-        "horde/db": "^3 || dev-FRAMEWORK_6_0",
-        "horde/log": "^3 || dev-FRAMEWORK_6_0",
-        "horde/mail": "^3 || dev-FRAMEWORK_6_0",
-        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
-        "horde/notification": "^3 || dev-FRAMEWORK_6_0",
-        "horde/perms": "^3 || dev-FRAMEWORK_6_0",
-        "horde/prefs": "^3 || dev-FRAMEWORK_6_0"
+        "horde/db": "^3",
+        "horde/log": "^3",
+        "horde/mail": "^3",
+        "horde/mime": "^3",
+        "horde/notification": "^3",
+        "horde/perms": "^3",
+        "horde/prefs": "^3"
     },
     "autoload": {
         "psr-0": {
