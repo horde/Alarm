@@ -47,7 +47,7 @@ class Horde_Alarm_Handler_Desktop extends Horde_Alarm_Handler
      *                       Optional parameter:
      *                       - icon: URL of an icon to display.
      */
-    public function __construct(array $params = null)
+    public function __construct(?array $params = null)
     {
         if (!isset($params['js_notify'])) {
             throw new InvalidArgumentException('Parameter \'js_notify\' missing.');

@@ -48,7 +48,7 @@ class Horde_Alarm_Handler_Mail extends Horde_Alarm_Handler
      *
      * @throws Horde_Alarm_Exception
      */
-    public function __construct(array $params = null)
+    public function __construct(?array $params = null)
     {
         foreach (array('identity', 'mail') as $param) {
             if (!isset($params[$param])) {
