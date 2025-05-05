@@ -14,7 +14,7 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 return $config->setRules([
     '@PSR12' => true,
-    '@PHP81Migration' => true,
+    '@PHP83Migration' => true,
     'ordered_imports' => true,
     'strict_param' => true,
     'declare_strict_types' => true,
