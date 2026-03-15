@@ -15,7 +15,7 @@ authors:
     active: true
     role: lead
 version:
-  release: 3.0.0-alpha5
+  release: 3.0.0-alpha6
   api: 3.0.0alpha1
 state:
   release: alpha
@@ -50,3 +50,4 @@ dependencies:
       phpunit/phpunit: ^12 || ^11 || ^10 || ^9
       phpstan/phpstan: ^2
       friendsofphp/php-cs-fixer: ^3
+vendor: horde

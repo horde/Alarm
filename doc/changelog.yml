@@ -1,4 +1,14 @@
 ---
+3.0.0-alpha6:
+  api: 3.0.0-alpha6
+  state:
+    release: alpha
+    api: alpha
+  date: 2026-03-15
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: Update composer.json
 3.0.0-alpha5:
   api: 3.0.0-alpha1
   state:

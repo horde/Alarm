@@ -1,7 +1,7 @@
 {
     "name": "horde/alarm",
     "description": "Alarm library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Alarm",
     "license": "LGPL-2.1-only",
     "authors": [
@@ -11,9 +11,10 @@
             "role": "lead"
         }
     ],
-    "time": "2025-05-05",
+    "time": "2026-03-15",
     "repositories": [],
     "require": {
+        "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^3 || ^2",
         "php": "^7.4 || ^8",
         "horde/date": "^3 || dev-FRAMEWORK_6_0",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
@@ -50,8 +51,11 @@
         }
     },
     "config": {
-        "allow-plugins": {
-            "horde/horde-installer-plugin": true
+        "allow-plugins": {}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-FRAMEWORK_6_0": "3.x-dev"
         }
     }
 }
