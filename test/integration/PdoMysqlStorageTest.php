@@ -10,12 +10,11 @@
 
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PDO;
 use Horde_Db_Adapter_Pdo_Mysql;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class PdoMysqlStorageTest extends SqlStorageTestBase
 {
     public static function setUpBeforeClass(): void

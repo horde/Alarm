@@ -10,12 +10,12 @@
 
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Depends;
 use Horde_Alarm_Null;
 use Horde_Alarm_Exception;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class NullStorageTest extends StorageTestBase
 {
     public function testFactory()
@@ -24,34 +24,26 @@ class NullStorageTest extends StorageTestBase
         $this->assertInstanceOf(Horde_Alarm_Null::class, self::$alarm);
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testExists()
     {
         $this->assertFalse(self::$alarm->exists('personalalarm', 'john'));
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testGet()
     {
         $this->expectException(Horde_Alarm_Exception::class);
         $alarm = self::$alarm->get('personalalarm', 'john');
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testUpdate($alarm)
     {
         $this->markTestIncomplete();
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testListAlarms()
     {
         self::$date->min--;
@@ -65,9 +57,7 @@ class NullStorageTest extends StorageTestBase
         $this->assertEquals(0, count($list));
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testDelete()
     {
         self::$alarm->delete('publicalarm', '');
@@ -75,17 +65,13 @@ class NullStorageTest extends StorageTestBase
         $this->assertEquals(0, count($list));
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testSnooze()
     {
         $this->assertFalse(self::$alarm->isSnoozed('personalalarm', 'john'));
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testAlarmWithoutEnd()
     {
         self::$alarm->set(['id' => 'noend',

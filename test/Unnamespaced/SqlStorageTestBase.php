@@ -10,6 +10,7 @@
 
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\Depends;
 use Horde_Log_Logger;
 use Horde_Log_Handler_Cli;
 use Horde_Db_Migration_Migrator;
@@ -65,6 +66,25 @@ abstract class SqlStorageTestBase extends StorageTestBase
         parent::setUp();
     }
 
+    /**
+     * Get test configuration from environment variable or config file.
+     */
+    protected static function getConfig(string $envVar, string $basePath): ?array
+    {
+        // Check environment variable
+        if ($config = getenv($envVar)) {
+            return json_decode($config, true);
+        }
+
+        // Check config file
+        $configFile = $basePath . '/conf.php';
+        if (file_exists($configFile)) {
+            return include $configFile;
+        }
+
+        return null;
+    }
+
     public function testFactory()
     {
         self::$alarm = new Horde_Alarm_Sql(['db' => self::$db, 'charset' => 'UTF-8']);
@@ -73,9 +93,7 @@ abstract class SqlStorageTestBase extends StorageTestBase
         self::$alarm->gc(true);
     }
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testSetWithInstanceId()
     {
         $now = time();

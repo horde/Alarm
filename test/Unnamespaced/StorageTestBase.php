@@ -10,7 +10,8 @@
 
 namespace Horde\Alarm\Test\Unnamespaced;
 
-use Horde\Test\TestCase;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use Horde_Date;
 use Horde_Alarm_Exception;
 
@@ -29,9 +30,7 @@ abstract class StorageTestBase extends TestCase
 
     abstract public function testFactory();
 
-    /**
-     * @depends testFactory
-     */
+    #[Depends('testFactory')]
     public function testSet()
     {
         $hash = ['id' => 'personalalarm',
@@ -44,17 +43,13 @@ abstract class StorageTestBase extends TestCase
         $this->assertNull(self::$alarm->set($hash));
     }
 
-    /**
-     * @depends testSet
-     */
+    #[Depends('testSet')]
     public function testExists()
     {
         $this->assertTrue(self::$alarm->exists('personalalarm', 'john'));
     }
 
-    /**
-     * @depends testExists
-     */
+    #[Depends('testExists')]
     public function testGet()
     {
         $alarm = self::$alarm->get('personalalarm', 'john');
@@ -73,18 +68,14 @@ abstract class StorageTestBase extends TestCase
         return $alarm;
     }
 
-    /**
-     * @depends testGet
-     */
+    #[Depends('testGet')]
     public function testUpdate($alarm)
     {
         $alarm['title'] = 'Changed alarm text';
         $this->assertNull(self::$alarm->set($alarm));
     }
 
-    /**
-     * @depends testUpdate
-     */
+    #[Depends('testUpdate')]
     public function testListAlarms()
     {
         $date = clone self::$date;
@@ -101,9 +92,7 @@ abstract class StorageTestBase extends TestCase
         $this->assertEquals('personalalarm', $list[1]['id']);
     }
 
-    /**
-     * @depends testListAlarms
-     */
+    #[Depends('testListAlarms')]
     public function testDelete()
     {
         self::$alarm->delete('publicalarm', '');
@@ -112,18 +101,14 @@ abstract class StorageTestBase extends TestCase
         $this->assertEquals('personalalarm', $list[0]['id']);
     }
 
-    /**
-     * @depends testDelete
-     */
+    #[Depends('testDelete')]
     public function testSnoozeException()
     {
         $this->expectException(Horde_Alarm_Exception::class);
         self::$alarm->snooze('personalalarm', 'jane', 30);
     }
 
-    /**
-     * @depends testDelete
-     */
+    #[Depends('testDelete')]
     public function testSnooze()
     {
         self::$alarm->snooze('personalalarm', 'john', 30);
@@ -142,9 +127,7 @@ abstract class StorageTestBase extends TestCase
         $this->assertFalse(self::$alarm->isSnoozed('personalalarm', 'john'));
     }
 
-    /**
-     * @depends testSnooze
-     */
+    #[Depends('testSnooze')]
     public function testAlarmWithoutEnd()
     {
         $start = clone self::$date;
@@ -161,9 +144,8 @@ abstract class StorageTestBase extends TestCase
         $this->assertEquals('personalalarm', $list[1]['id']);
     }
 
+    #[Depends('testAlarmWithoutEnd')]
     /**
-     * @depends testAlarmWithoutEnd
-     *
      * TODO: This should not be modeled as a test
      */
     public function testCleanUp()

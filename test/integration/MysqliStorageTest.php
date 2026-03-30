@@ -10,11 +10,10 @@
 
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Db_Adapter_Mysqli;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class MysqliStorageTest extends SqlStorageTestBase
 {
     public static function setUpBeforeClass(): void

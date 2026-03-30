@@ -11,6 +11,7 @@
 namespace Horde\Alarm\Test\Unnamespaced;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Alarm_Object;
 use Horde_Date;
 use Horde_Notification_Storage_Object;
@@ -22,9 +23,7 @@ use Horde\Alarm\Test\Helper\NotificationFactory;
 use Horde\Alarm\Test\Helper\IdentityFactory;
 use Horde\Alarm\Test\Helper\Identity;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class AlarmHandlerTest extends TestCase
 {
     protected static $alarm;

@@ -27,11 +27,7 @@
         "horde/mail": "^3 || dev-FRAMEWORK_6_0",
         "horde/mime": "^3 || dev-FRAMEWORK_6_0",
         "horde/notification": "^3 || dev-FRAMEWORK_6_0",
-        "horde/serialize": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
-        "phpunit/phpunit": "^12 || ^11 || ^10 || ^9",
-        "phpstan/phpstan": "^2",
-        "friendsofphp/php-cs-fixer": "^3"
+        "horde/serialize": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
         "horde/db": "^3 || dev-FRAMEWORK_6_0",
@@ -51,11 +47,14 @@
         }
     },
     "config": {
-        "allow-plugins": {}
+        "allow-plugins": {
+            "horde/horde-installer-plugin": true
+        }
     },
     "extra": {
         "branch-alias": {
             "dev-FRAMEWORK_6_0": "3.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

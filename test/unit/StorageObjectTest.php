@@ -10,12 +10,11 @@
 
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Alarm;
 use Horde_Alarm_Object;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class StorageObjectTest extends StorageTestBase
 {
     public function testFactory()
