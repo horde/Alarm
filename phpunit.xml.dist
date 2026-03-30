@@ -8,16 +8,33 @@
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
          failOnRisky="true"
-         failOnWarning="true">
+         failOnWarning="true"
+         defaultTestSuite="unit-all">
 
     <testsuites>
-        <!-- Unit tests: pure unit tests with no external dependencies -->
+        <!-- Default: all true unit tests (no DB dependencies) -->
+        <testsuite name="unit-all">
+            <directory>test/unit</directory>
+            <directory>test/unit-modern</directory>
+        </testsuite>
+
+        <!-- Legacy unit tests: PSR-0 lib/ code with no DB dependencies -->
         <testsuite name="unit">
             <directory>test/unit</directory>
         </testsuite>
 
-        <!-- Integration tests: require database or external services -->
-        <testsuite name="integration">
+        <!-- Modern unit tests: PSR-4 src/ code with no DB dependencies -->
+        <testsuite name="unit-modern">
+            <directory>test/unit-modern</directory>
+        </testsuite>
+
+        <!-- SQLite integration: PSR-4 src/ with SQLite in-memory -->
+        <testsuite name="integration-sqlite">
+            <directory>test/integration-modern</directory>
+        </testsuite>
+
+        <!-- Legacy integration: PSR-0 lib/ with various databases -->
+        <testsuite name="integration-legacy">
             <directory>test/integration</directory>
         </testsuite>
     </testsuites>
