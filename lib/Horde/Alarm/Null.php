@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
  *
@@ -34,7 +35,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      */
     protected function _list($user, Horde_Date $time)
     {
-        return array();
+        return [];
     }
 
     /**
@@ -44,7 +45,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      */
     protected function _global()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -68,9 +69,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _add(array $alarm)
-    {
-    }
+    protected function _add(array $alarm) {}
 
     /**
      * Updates an alarm hash in the backend.
@@ -80,9 +79,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _update(array $alarm, $keepsnooze = false)
-    {
-    }
+    protected function _update(array $alarm, $keepsnooze = false) {}
 
     /**
      * Updates internal alarm properties, i.e. properties not determined by
@@ -94,9 +91,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    public function internal($id, $user, array $internal)
-    {
-    }
+    public function internal($id, $user, array $internal) {}
 
     /**
      * Returns whether an alarm with the given id exists already.
@@ -122,9 +117,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _snooze($id, $user, Horde_Date $snooze)
-    {
-    }
+    protected function _snooze($id, $user, Horde_Date $snooze) {}
 
     /**
      * Returns whether an alarm is snoozed.
@@ -149,9 +142,7 @@ class Horde_Alarm_Null extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _dismiss($id, $user)
-    {
-    }
+    protected function _dismiss($id, $user) {}
 
     /**
      * Deletes an alarm from the backend.
@@ -161,27 +152,21 @@ class Horde_Alarm_Null extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _delete($id, $user = null)
-    {
-    }
+    protected function _delete($id, $user = null) {}
 
     /**
      * Garbage collects old alarms in the backend.
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _gc()
-    {
-    }
+    protected function _gc() {}
 
     /**
      * Attempts to initialize the backend.
      *
      * @throws Horde_Alarm_Exception
      */
-    public function initialize()
-    {
-    }
+    public function initialize() {}
 
     /**
      * Converts a value from the driver's charset.

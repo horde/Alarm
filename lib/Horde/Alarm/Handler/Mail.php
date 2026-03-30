@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
  *
@@ -50,7 +51,7 @@ class Horde_Alarm_Handler_Mail extends Horde_Alarm_Handler
      */
     public function __construct(?array $params = null)
     {
-        foreach (array('identity', 'mail') as $param) {
+        foreach (['identity', 'mail'] as $param) {
             if (!isset($params[$param])) {
                 throw new Horde_Alarm_Exception('Parameter \'' . $param . '\' missing.');
             }
@@ -90,12 +91,12 @@ class Horde_Alarm_Handler_Mail extends Horde_Alarm_Handler
         }
 
         try {
-            $mail = new Horde_Mime_Mail(array(
+            $mail = new Horde_Mime_Mail([
                 'Subject' => $alarm['title'],
                 'To' => $email,
                 'From' => $email,
                 'Auto-Submitted' => 'auto-generated',
-                'X-Horde-Alarm' => $alarm['title']));
+                'X-Horde-Alarm' => $alarm['title']]);
             if (isset($alarm['params']['mail']['mimepart'])) {
                 $mail->setBasePart($alarm['params']['mail']['mimepart']);
             } elseif (empty($alarm['params']['mail']['body'])) {
@@ -149,10 +150,10 @@ class Horde_Alarm_Handler_Mail extends Horde_Alarm_Handler
      */
     public function getParameters()
     {
-        return array(
-            'email' => array(
+        return [
+            'email' => [
                 'type' => 'text',
                 'desc' => Horde_Alarm_Translation::t("Email address (optional)"),
-                'required' => false));
+                'required' => false]];
     }
 }

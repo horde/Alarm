@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
  *
@@ -45,9 +46,7 @@ abstract class Horde_Alarm_Handler
      *
      * @param array $alarm  An alarm hash.
      */
-    public function reset(array $alarm)
-    {
-    }
+    public function reset(array $alarm) {}
 
     /**
      * Returns a human readable description of the handler.
@@ -70,6 +69,6 @@ abstract class Horde_Alarm_Handler
      */
     public function getParameters()
     {
-        return array();
+        return [];
     }
 }

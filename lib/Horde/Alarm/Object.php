@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
  *
@@ -23,7 +24,7 @@
  */
 class Horde_Alarm_Object extends Horde_Alarm
 {
-    protected $_alarms = array();
+    protected $_alarms = [];
 
     /**
      * Returns a certain alarm.
@@ -78,17 +79,17 @@ class Horde_Alarm_Object extends Horde_Alarm
      */
     protected function _list($user, Horde_Date $time)
     {
-        $alarms = array();
+        $alarms = [];
         foreach ($this->_alarms as $alarm) {
-            if (empty($alarm['dismissed']) &&
-                ((empty($alarm['snooze']) && $alarm['start']->compareDateTime($time) <= 0) ||
-                 $alarm['snooze']->compareDateTime($time) <= 0) &&
-                (empty($alarm['end']) || $alarm['end']->compareDateTime($time) >= 0) &&
-                (is_null($user) || empty($alarm['uid']) || $alarm['uid'] = $user)) {
+            if (empty($alarm['dismissed'])
+                && ((empty($alarm['snooze']) && $alarm['start']->compareDateTime($time) <= 0)
+                 || $alarm['snooze']->compareDateTime($time) <= 0)
+                && (empty($alarm['end']) || $alarm['end']->compareDateTime($time) >= 0)
+                && (is_null($user) || empty($alarm['uid']) || $alarm['uid'] = $user)) {
                 $alarms[] = $alarm;
             }
         }
-        usort($alarms, array($this, '_sortAlarms'));
+        usort($alarms, [$this, '_sortAlarms']);
         return $alarms;
     }
 
@@ -99,7 +100,7 @@ class Horde_Alarm_Object extends Horde_Alarm
      */
     protected function _global()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -128,12 +129,13 @@ class Horde_Alarm_Object extends Horde_Alarm
     protected function _add(array $alarm)
     {
         $alarm = array_merge(
-            array('user' => '',
-                  'end' => null,
-                  'text' => null,
-                  'snooze' => null,
-                  'internal' => null),
-            $alarm);
+            ['user' => '',
+                'end' => null,
+                'text' => null,
+                'snooze' => null,
+                'internal' => null],
+            $alarm
+        );
         $this->_alarms[] = $alarm;
     }
 
@@ -145,10 +147,10 @@ class Horde_Alarm_Object extends Horde_Alarm
      */
     protected function _update(array $alarm, $keepsnooze = false)
     {
-        $user = isset($alarm['user']) ? $alarm['user'] : null;
+        $user = $alarm['user'] ?? null;
         $al = &$this->_findAlarm($alarm['id'], $user);
-        foreach (array('start', 'end', 'methods', 'params', 'title', 'text') as $property) {
-            $al[$property] = isset($alarm[$property]) ? $alarm[$property] : null;
+        foreach (['start', 'end', 'methods', 'params', 'title', 'text'] as $property) {
+            $al[$property] = $alarm[$property] ?? null;
         }
         if (!$keepsnooze) {
             $al['snooze'] = null;
@@ -183,7 +185,7 @@ class Horde_Alarm_Object extends Horde_Alarm
      */
     protected function _exists($id, $user, $instanceid = null)
     {
-        return (bool)$this->_findAlarm($id, $user, $instanceid);
+        return (bool) $this->_findAlarm($id, $user, $instanceid);
     }
 
     /**
@@ -214,9 +216,9 @@ class Horde_Alarm_Object extends Horde_Alarm
     protected function _isSnoozed($id, $user, Horde_Date $time)
     {
         $alarm = $this->_findAlarm($id, $user);
-        return !empty($alarm['dismissed']) ||
-            (isset($alarm['snooze']) &&
-             $alarm['snooze']->compareDateTime($time) >= 0);
+        return !empty($alarm['dismissed'])
+            || (isset($alarm['snooze'])
+             && $alarm['snooze']->compareDateTime($time) >= 0);
     }
 
     /**
@@ -243,10 +245,10 @@ class Horde_Alarm_Object extends Horde_Alarm
      */
     protected function _delete($id, $user = null)
     {
-        $newAlarms = array();
+        $newAlarms = [];
         foreach ($this->_alarms as &$alarm) {
-            if ($alarm['id'] != $id ||
-                (!is_null($user) && $alarm['user'] != $user)) {
+            if ($alarm['id'] != $id
+                || (!is_null($user) && $alarm['user'] != $user)) {
                 $newAlarms[] = $alarm;
             }
         }
@@ -258,18 +260,14 @@ class Horde_Alarm_Object extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    protected function _gc()
-    {
-    }
+    protected function _gc() {}
 
     /**
      * Attempts to initialize the backend.
      *
      * @throws Horde_Alarm_Exception
      */
-    public function initialize()
-    {
-    }
+    public function initialize() {}
 
     /**
      * Converts a value from the driver's charset.

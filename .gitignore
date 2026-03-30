@@ -34,6 +34,9 @@ run-tests.log
 # ignore composer artifacts
 composer.lock
 vendor/
+var/
+build/
+web/
 
 # Added by horde-components QC --fix-qc-issues
 # Build artifacts directory

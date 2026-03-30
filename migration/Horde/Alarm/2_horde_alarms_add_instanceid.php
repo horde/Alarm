@@ -1,4 +1,5 @@
 <?php
+
 class HordeAlarmsAddInstanceId extends Horde_Db_Migration_Base
 {
     public function up()
@@ -7,7 +8,8 @@ class HordeAlarmsAddInstanceId extends Horde_Db_Migration_Base
             'horde_alarms',
             'alarm_instanceid',
             'string',
-            array('limit' => 255));
+            ['limit' => 255]
+        );
     }
 
     public function down()

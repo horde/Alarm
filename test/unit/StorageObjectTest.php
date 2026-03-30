@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -6,11 +7,14 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Alarm;
 use Horde_Alarm_Object;
 
+#[CoversNothing]
 class StorageObjectTest extends StorageTestBase
 {
     public function testFactory()

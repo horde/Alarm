@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -6,8 +7,13 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
+use Horde_Db_Adapter_Mysql;
+
+#[CoversNothing]
 class MysqlStorageTest extends SqlStorageTestBase
 {
     public static function setUpBeforeClass(): void
@@ -16,8 +22,10 @@ class MysqlStorageTest extends SqlStorageTestBase
             self::$reason = 'No mysql extension';
             return;
         }
-        $config = self::getConfig('ALARM_SQL_MYSQL_TEST_CONFIG',
-                                  __DIR__ . '/../..');
+        $config = self::getConfig(
+            'ALARM_SQL_MYSQL_TEST_CONFIG',
+            __DIR__ . '/../..'
+        );
         if ($config && !empty($config['alarm']['sql']['mysql'])) {
             self::$db = new Horde_Db_Adapter_Mysql($config['alarm']['sql']['mysql']);
             parent::setUpBeforeClass();

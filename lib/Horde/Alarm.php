@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2017 Horde LLC (http://www.horde.org/)
  *
@@ -42,16 +43,16 @@ abstract class Horde_Alarm
      *
      * @var array
      */
-    protected $_params = array(
-        'ttl' => 300
-    );
+    protected $_params = [
+        'ttl' => 300,
+    ];
 
     /**
      * All registered notification handlers.
      *
      * @var array
      */
-    protected $_handlers = array();
+    protected $_handlers = [];
 
     /**
      * Whether handler classes have been dynamically loaded already.
@@ -65,7 +66,7 @@ abstract class Horde_Alarm
      *
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
 
     /**
      * Constructor.
@@ -76,7 +77,7 @@ abstract class Horde_Alarm
      * 'ttl' - (integer) Time to live value, in seconds.
      * </pre>
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         if (isset($params['logger'])) {
             $this->_logger = $params['logger'];
@@ -103,9 +104,12 @@ abstract class Horde_Alarm
      * @return array  A list of alarm hashes.
      * @throws Horde_Alarm_Exception
      */
-    public function listAlarms($user = null, ?Horde_Date $time = null,
-                               $load = false, $preload = true)
-    {
+    public function listAlarms(
+        $user = null,
+        ?Horde_Date $time = null,
+        $load = false,
+        $preload = true
+    ) {
         if (empty($time)) {
             $time = new Horde_Date(time());
         }
@@ -226,12 +230,12 @@ abstract class Horde_Alarm
         // If this is a recurring alarm and we have a new instanceid,
         // remove the previous entry regardless of the value of $keep.
         // Otherwise, the alarm will never be reset. @since 2.2.0
-        if (!empty($alarm['instanceid']) &&
-            !$this->exists($alarm['id'], isset($alarm['user']) ? $alarm['user'] : '', !empty($alarm['instanceid']) ? $alarm['instanceid'] : null)) {
-            $this->delete($alarm['id'], isset($alarm['user']) ? $alarm['user'] : '');
+        if (!empty($alarm['instanceid'])
+            && !$this->exists($alarm['id'], $alarm['user'] ?? '', !empty($alarm['instanceid']) ? $alarm['instanceid'] : null)) {
+            $this->delete($alarm['id'], $alarm['user'] ?? '');
         }
 
-        if ($this->exists($alarm['id'], isset($alarm['user']) ? $alarm['user'] : '')) {
+        if ($this->exists($alarm['id'], $alarm['user'] ?? '')) {
             $this->_update($alarm, $keep);
             if (!$keep) {
                 foreach ($this->_handlers as &$handler) {
@@ -363,7 +367,7 @@ abstract class Horde_Alarm
         if (is_null($time)) {
             $time = new Horde_Date(time());
         }
-        return (bool)$this->_isSnoozed($id, $user, $time);
+        return (bool) $this->_isSnoozed($id, $user, $time);
     }
 
     /**
@@ -396,7 +400,7 @@ abstract class Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    function delete($id, $user = null)
+    public function delete($id, $user = null)
     {
         $this->_delete($id, $user);
     }
@@ -424,9 +428,12 @@ abstract class Horde_Alarm
      * @throws Horde_Alarm_Exception if loading of alarms fails, but not if
      *                               notifying of individual alarms fails.
      */
-    public function notify($user = null, $load = true, $preload = true,
-                           array $exclude = array())
-    {
+    public function notify(
+        $user = null,
+        $load = true,
+        $preload = true,
+        array $exclude = []
+    ) {
         try {
             $alarms = $this->listAlarms($user, null, $load, $preload);
         } catch (Horde_Alarm_Exception $e) {
@@ -443,8 +450,8 @@ abstract class Horde_Alarm
         $handlers = $this->handlers();
         foreach ($alarms as $alarm) {
             foreach ($alarm['methods'] as $key => $alarm_method) {
-                if (isset($handlers[$alarm_method]) &&
-                    !in_array($alarm_method, $exclude)) {
+                if (isset($handlers[$alarm_method])
+                    && !in_array($alarm_method, $exclude)) {
                     try {
                         $handlers[$alarm_method]->notify($alarm);
                     } catch (Horde_Alarm_Exception $e) {
