@@ -1,4 +1,5 @@
 <?php
+
 namespace Horde\Alarm\Test\Helper;
 
 class IdentityFactory

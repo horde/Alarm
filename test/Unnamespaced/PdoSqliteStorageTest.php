@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -7,10 +8,15 @@
  * @subpackage UnitTests
  *
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
+
 use Horde_Test_Factory_Db;
 use Horde_Test_Exception;
 
+/**
+ * @coversNothing
+ */
 class PdoSqliteStorageTest extends SqlStorageTestBase
 {
     public static function setUpBeforeClass(): void

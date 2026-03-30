@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -6,7 +7,9 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
+
 use Horde_Log_Logger;
 use Horde_Log_Handler_Cli;
 use Horde_Db_Migration_Migrator;
@@ -37,8 +40,9 @@ abstract class SqlStorageTestBase extends StorageTestBase
         self::$migrator = new Horde_Db_Migration_Migrator(
             self::$db,
             null,//$logger,
-            array('migrationsPath' => $dir,
-                  'schemaTableName' => 'horde_alarm_schema_info'));
+            ['migrationsPath' => $dir,
+                'schemaTableName' => 'horde_alarm_schema_info']
+        );
         self::$migrator->up();
     }
 
@@ -63,7 +67,7 @@ abstract class SqlStorageTestBase extends StorageTestBase
 
     public function testFactory()
     {
-        self::$alarm = new Horde_Alarm_Sql(array('db' => self::$db, 'charset' => 'UTF-8'));
+        self::$alarm = new Horde_Alarm_Sql(['db' => self::$db, 'charset' => 'UTF-8']);
         $this->assertInstanceOf(Horde_Alarm_Sql::class, self::$alarm);
         self::$alarm->initialize();
         self::$alarm->gc(true);
@@ -77,14 +81,14 @@ abstract class SqlStorageTestBase extends StorageTestBase
         $now = time();
         $date = new Horde_Date($now);
         $end = new Horde_Date($now + 3600);
-        $hash = array('id' => '123',
-                      'user' => 'john',
-                      'start' => $date,
-                      'end' => $end,
-                      'methods' => array(),
-                      'params' => array(),
-                      'title' => 'This is the first instance',
-                      'instanceid' => '03052014');
+        $hash = ['id' => '123',
+            'user' => 'john',
+            'start' => $date,
+            'end' => $end,
+            'methods' => [],
+            'params' => [],
+            'title' => 'This is the first instance',
+            'instanceid' => '03052014'];
 
         self::$alarm->set($hash);
         $alarm = self::$alarm->get('123', 'john');

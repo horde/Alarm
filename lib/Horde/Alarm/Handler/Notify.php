@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
  *
@@ -66,9 +67,9 @@ class Horde_Alarm_Handler_Notify extends Horde_Alarm_Handler
     public function notify(array $alarm)
     {
         $notification = $this->_notification->create();
-        $notification->push($alarm['title'], 'horde.alarm', array('alarm' => $alarm));
-        if (!empty($alarm['params']['notify']['sound']) &&
-            !isset($this->_soundPlayed[$alarm['params']['notify']['sound']])) {
+        $notification->push($alarm['title'], 'horde.alarm', ['alarm' => $alarm]);
+        if (!empty($alarm['params']['notify']['sound'])
+            && !isset($this->_soundPlayed[$alarm['params']['notify']['sound']])) {
             $notification->attach('audio');
             $notification->push($alarm['params']['notify']['sound'], 'audio');
             $this->_soundPlayed[$alarm['params']['notify']['sound']] = true;
@@ -99,10 +100,10 @@ class Horde_Alarm_Handler_Notify extends Horde_Alarm_Handler
      */
     public function getParameters()
     {
-        return array(
-            'sound' => array(
+        return [
+            'sound' => [
                 'type' => 'sound',
                 'desc' => Horde_Alarm_Translation::t("Play a sound?"),
-                'required' => false));
+                'required' => false]];
     }
 }

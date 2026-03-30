@@ -1,5 +1,7 @@
 <?php
+
 namespace Horde\Alarm\Test\Helper;
+
 use Horde_Notification_Handler;
 
 class NotificationFactory

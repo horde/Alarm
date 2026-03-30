@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -6,7 +7,9 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
+
 use PHPUnit\Framework\TestCase;
 use Horde_Alarm_Object;
 use Horde_Date;
@@ -19,6 +22,9 @@ use Horde\Alarm\Test\Helper\NotificationFactory;
 use Horde\Alarm\Test\Helper\IdentityFactory;
 use Horde\Alarm\Test\Helper\Identity;
 
+/**
+ * @coversNothing
+ */
 class AlarmHandlerTest extends TestCase
 {
     protected static $alarm;
@@ -38,34 +44,34 @@ class AlarmHandlerTest extends TestCase
 
         self::$alarm = new Horde_Alarm_Object();
         $now = time();
-        $hash = array('id' => 'personalalarm',
-                      'user' => 'john',
-                      'start' => new Horde_Date($now),
-                      'end' => new Horde_Date($now + 3600),
-                      'methods' => array(),
-                      'params' => array(),
-                      'title' => 'This is a personal alarm.',
-                      'text' => 'Action is required.');
+        $hash = ['id' => 'personalalarm',
+            'user' => 'john',
+            'start' => new Horde_Date($now),
+            'end' => new Horde_Date($now + 3600),
+            'methods' => [],
+            'params' => [],
+            'title' => 'This is a personal alarm.',
+            'text' => 'Action is required.'];
         self::$alarm->set($hash);
 
         self::$storage = new Horde_Notification_Storage_Object();
         $notification = new NotificationFactory(self::$storage);
-        $handler = new Horde_Alarm_Handler_Notify(array('notification' => $notification));
+        $handler = new Horde_Alarm_Handler_Notify(['notification' => $notification]);
         self::$alarm->addHandler('notify', $handler);
 
-        $handler = new Horde_Alarm_Handler_Desktop(array('js_notify' => array($this, 'desktopCallback'), 'icon' => 'test.png'));
+        $handler = new Horde_Alarm_Handler_Desktop(['js_notify' => [$this, 'desktopCallback'], 'icon' => 'test.png']);
         self::$alarm->addHandler('desktop', $handler);
 
         self::$mail = new Horde_Mail_Transport_Mock();
         $factory = new IdentityFactory();
-        $handler = new Horde_Alarm_Handler_Mail(array('mail' => self::$mail, 'identity' => $factory, 'charset' => 'us-ascii'));
+        $handler = new Horde_Alarm_Handler_Mail(['mail' => self::$mail, 'identity' => $factory, 'charset' => 'us-ascii']);
         self::$alarm->addHandler('mail', $handler);
     }
 
     public function testNotify()
     {
         $alarm = self::$alarm->get('personalalarm', 'john');
-        $alarm['methods'] = array('notify');
+        $alarm['methods'] = ['notify'];
         self::$alarm->set($alarm);
         self::$alarm->notify('john', false);
 
@@ -76,8 +82,8 @@ class AlarmHandlerTest extends TestCase
 
     public function testMail()
     {
-        $header =
-'Subject: This is a personal alarm.
+        $header
+= 'Subject: This is a personal alarm.
 To: john@example.com
 From: john@example.com
 Auto-Submitted: auto-generated
@@ -90,7 +96,7 @@ MIME-Version: 1.0';
         $body = "Action is required.\n";
 
         $alarm = self::$alarm->get('personalalarm', 'john');
-        $alarm['methods'] = array('mail');
+        $alarm['methods'] = ['mail'];
         self::$alarm->set($alarm);
         self::$alarm->notify('john', false);
         $last_sent = end(self::$mail->sentMessages);
@@ -101,9 +107,9 @@ MIME-Version: 1.0';
         );
         $this->assertEquals($body, $last_sent['body']);
 
-        self::$mail->sentMessages = array();
+        self::$mail->sentMessages = [];
         self::$alarm->notify('john', false);
-        $this->assertEquals(self::$mail->sentMessages, array());
+        $this->assertEquals(self::$mail->sentMessages, []);
 
         /* Test re-sending mails after changing the alarm. */
         self::$alarm->set(self::$alarm->get('personalalarm', 'john'));
@@ -120,7 +126,7 @@ MIME-Version: 1.0';
     public function testDesktop()
     {
         $alarm = self::$alarm->get('personalalarm', 'john');
-        $alarm['methods'] = array('desktop');
+        $alarm['methods'] = ['desktop'];
         self::$alarm->set($alarm);
         self::$alarm->notify('john', false);
     }
@@ -129,6 +135,7 @@ MIME-Version: 1.0';
     {
         $this->assertEquals(
             "if(window.webkitNotifications)(function(){function show(){switch(window.webkitNotifications.checkPermission()){case 0:var notify=window.webkitNotifications.createNotification(\"test.png\",\"This is a personal alarm.\",\"Action is required.\");notify.show();(function(){notify.cancel()}).delay(5);break;case 1:window.webkitNotifications.requestPermission(function(){});break}}show()})()",
-            $js);
+            $js
+        );
     }
 }

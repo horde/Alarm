@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2007-2017 Horde LLC (http://www.horde.org/)
  *
@@ -44,7 +45,7 @@ class Horde_Alarm_Sql extends Horde_Alarm
      *
      * @throws Horde_Alarm_Exception
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         if (!isset($params['db'])) {
             throw new Horde_Alarm_Exception('Missing db parameter.');
@@ -52,9 +53,9 @@ class Horde_Alarm_Sql extends Horde_Alarm
         $this->_db = $params['db'];
         unset($params['db']);
 
-        $params = array_merge(array(
-            'table' => 'horde_alarms'
-        ), $params);
+        $params = array_merge([
+            'table' => 'horde_alarms',
+        ], $params);
 
         parent::__construct($params);
     }
@@ -71,17 +72,19 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _list($user, Horde_Date $time)
     {
-        $query = sprintf('SELECT alarm_id, alarm_uid, alarm_start, alarm_end, alarm_methods, alarm_params, alarm_title, alarm_text, alarm_snooze, alarm_internal FROM %s WHERE alarm_dismissed = 0 AND ((alarm_snooze IS NULL AND alarm_start <= ?) OR alarm_snooze <= ?) AND (alarm_end IS NULL OR alarm_end >= ?)%s ORDER BY alarm_start, alarm_end',
-                         $this->_params['table'],
-                         is_null($user) ? '' : ' AND (alarm_uid IS NULL OR alarm_uid = ? OR alarm_uid = ?)');
+        $query = sprintf(
+            'SELECT alarm_id, alarm_uid, alarm_start, alarm_end, alarm_methods, alarm_params, alarm_title, alarm_text, alarm_snooze, alarm_internal FROM %s WHERE alarm_dismissed = 0 AND ((alarm_snooze IS NULL AND alarm_start <= ?) OR alarm_snooze <= ?) AND (alarm_end IS NULL OR alarm_end >= ?)%s ORDER BY alarm_start, alarm_end',
+            $this->_params['table'],
+            is_null($user) ? '' : ' AND (alarm_uid IS NULL OR alarm_uid = ? OR alarm_uid = ?)'
+        );
         $dt = $time->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT);
-        $values = array($dt, $dt, $dt);
+        $values = [$dt, $dt, $dt];
         if (!is_null($user)) {
             $values[] = '';
-            $values[] = (string)$user;
+            $values[] = (string) $user;
         }
 
-        $alarms = array();
+        $alarms = [];
         try {
             $result = $this->_db->select($query, $values);
             foreach ($result as $val) {
@@ -104,8 +107,10 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _global()
     {
-        $query = sprintf('SELECT alarm_id, alarm_uid, alarm_start, alarm_end, alarm_methods, alarm_params, alarm_title, alarm_text, alarm_snooze, alarm_internal FROM %s WHERE alarm_uid IS NULL OR alarm_uid = \'\' ORDER BY alarm_start, alarm_end',
-                         $this->_params['table']);
+        $query = sprintf(
+            'SELECT alarm_id, alarm_uid, alarm_start, alarm_end, alarm_methods, alarm_params, alarm_title, alarm_text, alarm_snooze, alarm_internal FROM %s WHERE alarm_uid IS NULL OR alarm_uid = \'\' ORDER BY alarm_start, alarm_end',
+            $this->_params['table']
+        );
 
         try {
             $result = $this->_db->select($query);
@@ -115,7 +120,7 @@ class Horde_Alarm_Sql extends Horde_Alarm
             );
         }
 
-        $alarms = array();
+        $alarms = [];
         foreach ($result as $val) {
             $alarms[] = $this->_getHash($val);
         }
@@ -127,7 +132,7 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _getHash(array $alarm)
     {
-        foreach (array('params', 'text', 'internal') as $column) {
+        foreach (['params', 'text', 'internal'] as $column) {
             if (isset($alarm['alarm_' . $column])) {
                 $alarm['alarm_' . $column] = $this->_convertBinary(
                     'alarm_' . $column,
@@ -143,17 +148,18 @@ class Horde_Alarm_Sql extends Horde_Alarm
         try {
             $params = @unserialize($params);
         } catch (Exception $e) {
-            $params = array();
+            $params = [];
         }
 
         $internal = null;
         if (!empty($alarm['alarm_internal'])) {
             try {
                 $internal = @unserialize($alarm['alarm_internal']);
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+            }
         }
 
-        return array(
+        return [
             'id' => $alarm['alarm_id'],
             'user' => $alarm['alarm_uid'],
             'start' => new Horde_Date($alarm['alarm_start'], 'UTC'),
@@ -163,8 +169,8 @@ class Horde_Alarm_Sql extends Horde_Alarm
             'title' => $this->_fromDriver($alarm['alarm_title']),
             'text' => $this->_fromDriver($alarm['alarm_text']),
             'snooze' => empty($alarm['alarm_snooze']) ? null : new Horde_Date($alarm['alarm_snooze'], 'UTC'),
-            'internal' => $internal
-        );
+            'internal' => $internal,
+        ];
     }
 
     /**
@@ -185,7 +191,7 @@ class Horde_Alarm_Sql extends Horde_Alarm
         );
 
         try {
-            $alarm = $this->_db->selectOne($query, array($id, $user));
+            $alarm = $this->_db->selectOne($query, [$id, $user]);
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Alarm_Exception(
                 Horde_Alarm_Translation::t("Server error when querying database.")
@@ -208,9 +214,9 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _add(array $alarm)
     {
-        $values = array(
+        $values = [
             'alarm_id' => $alarm['id'],
-            'alarm_uid' => isset($alarm['user']) ? $alarm['user'] : '',
+            'alarm_uid' => $alarm['user'] ?? '',
             'alarm_start' => $alarm['start']->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT),
             'alarm_end' => empty($alarm['end']) ? null : $alarm['end']->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT),
             'alarm_methods' => serialize($alarm['methods']),
@@ -218,8 +224,8 @@ class Horde_Alarm_Sql extends Horde_Alarm
             'alarm_title' => $this->_toDriver($alarm['title']),
             'alarm_text' => empty($alarm['text']) ? null : new Horde_Db_Value_Text($this->_toDriver($alarm['text'])),
             'alarm_snooze' => null,
-            'alarm_instanceid' => empty($alarm['instanceid']) ? null : $alarm['instanceid']
-        );
+            'alarm_instanceid' => empty($alarm['instanceid']) ? null : $alarm['instanceid'],
+        ];
 
         try {
             $this->_db->insertBlob($this->_params['table'], $values);
@@ -240,25 +246,25 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _update(array $alarm, $keepsnooze = false)
     {
-        $where = array(
+        $where = [
             sprintf(
                 'alarm_id = ? AND %s',
                 isset($alarm['user']) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)'
             ),
-            array(
+            [
                 $alarm['id'],
-                isset($alarm['user']) ? $alarm['user'] : ''
-            )
-        );
-        $values = array(
+                $alarm['user'] ?? '',
+            ],
+        ];
+        $values = [
             'alarm_start' => $alarm['start']->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT),
             'alarm_end' => empty($alarm['end']) ? null : $alarm['end']->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT),
             'alarm_methods' => serialize($alarm['methods']),
             'alarm_params' => new Horde_Db_Value_Text(base64_encode(serialize($alarm['params']))),
             'alarm_title' => $this->_toDriver($alarm['title']),
             'alarm_instanceid' => empty($alarm['instanceid']) ? null : $alarm['instanceid'],
-            'alarm_text' => empty($alarm['text']) ? null : new Horde_Db_Value_Text($this->_toDriver($alarm['text']))
-        );
+            'alarm_text' => empty($alarm['text']) ? null : new Horde_Db_Value_Text($this->_toDriver($alarm['text'])),
+        ];
         if (!$keepsnooze) {
             $values['alarm_snooze'] = null;
             $values['alarm_dismissed'] = 0;
@@ -285,10 +291,12 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     public function internal($id, $user, array $internal)
     {
-        $query = sprintf('UPDATE %s set alarm_internal = ? WHERE alarm_id = ? AND %s',
-                         $this->_params['table'],
-                         !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)');
-        $values = array(new Horde_Db_Value_Text(serialize($internal)), $id, $user);
+        $query = sprintf(
+            'UPDATE %s set alarm_internal = ? WHERE alarm_id = ? AND %s',
+            $this->_params['table'],
+            !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)'
+        );
+        $values = [new Horde_Db_Value_Text(serialize($internal)), $id, $user];
 
         try {
             $this->_db->update($query, $values);
@@ -311,11 +319,13 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _exists($id, $user, $instanceid = null)
     {
-        $query = sprintf('SELECT 1 FROM %s WHERE alarm_id = ? AND %s',
-                         $this->_params['table'],
-                         (!empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)')
-                         . (!empty($instanceid) ? ' AND alarm_instanceid = ?' : ''));
-        $params = array($id, $user);
+        $query = sprintf(
+            'SELECT 1 FROM %s WHERE alarm_id = ? AND %s',
+            $this->_params['table'],
+            (!empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)')
+                         . (!empty($instanceid) ? ' AND alarm_instanceid = ?' : '')
+        );
+        $params = [$id, $user];
         if (!empty($instanceid)) {
             $params[] = $instanceid;
         }
@@ -340,10 +350,12 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _snooze($id, $user, Horde_Date $snooze)
     {
-        $query = sprintf('UPDATE %s set alarm_snooze = ? WHERE alarm_id = ? AND %s',
-                         $this->_params['table'],
-                         !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)');
-        $values = array($snooze->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT), $id, $user);
+        $query = sprintf(
+            'UPDATE %s set alarm_snooze = ? WHERE alarm_id = ? AND %s',
+            $this->_params['table'],
+            !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)'
+        );
+        $values = [$snooze->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT), $id, $user];
 
         try {
             $this->_db->update($query, $values);
@@ -366,12 +378,14 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _isSnoozed($id, $user, Horde_Date $time)
     {
-        $query = sprintf('SELECT 1 FROM %s WHERE alarm_id = ? AND %s AND (alarm_dismissed = 1 OR (alarm_snooze IS NOT NULL AND alarm_snooze >= ?))',
-                         $this->_params['table'],
-                         !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)');
+        $query = sprintf(
+            'SELECT 1 FROM %s WHERE alarm_id = ? AND %s AND (alarm_dismissed = 1 OR (alarm_snooze IS NOT NULL AND alarm_snooze >= ?))',
+            $this->_params['table'],
+            !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)'
+        );
 
         try {
-            return $this->_db->selectValue($query, array($id, $user, $time->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT)));
+            return $this->_db->selectValue($query, [$id, $user, $time->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT)]);
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Alarm_Exception(
                 Horde_Alarm_Translation::t("Server error when querying database.")
@@ -389,10 +403,12 @@ class Horde_Alarm_Sql extends Horde_Alarm
      */
     protected function _dismiss($id, $user)
     {
-        $query = sprintf('UPDATE %s set alarm_dismissed = 1 WHERE alarm_id = ? AND %s',
-                         $this->_params['table'],
-                         !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)');
-        $values = array($id, $user);
+        $query = sprintf(
+            'UPDATE %s set alarm_dismissed = 1 WHERE alarm_id = ? AND %s',
+            $this->_params['table'],
+            !empty($user) ? 'alarm_uid = ?' : '(alarm_uid = ? OR alarm_uid IS NULL)'
+        );
+        $values = [$id, $user];
 
         try {
             $this->_db->update($query, $values);
@@ -414,7 +430,7 @@ class Horde_Alarm_Sql extends Horde_Alarm
     protected function _delete($id, $user = null)
     {
         $query = sprintf('DELETE FROM %s WHERE alarm_id = ?', $this->_params['table']);
-        $values = array($id);
+        $values = [$id];
         if (!is_null($user)) {
             $query .= empty($user)
                 ? ' AND (alarm_uid IS NULL OR alarm_uid = ?)'
@@ -438,7 +454,7 @@ class Horde_Alarm_Sql extends Horde_Alarm
     {
         $query = sprintf('DELETE FROM %s WHERE alarm_end IS NOT NULL AND alarm_end < ?', $this->_params['table']);
         $end = new Horde_Date(time());
-        $this->_db->delete($query, array($end->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT)));
+        $this->_db->delete($query, [$end->setTimezone('UTC')->format(Horde_Date::DATE_DEFAULT)]);
     }
 
     /**
@@ -450,15 +466,15 @@ class Horde_Alarm_Sql extends Horde_Alarm
     {
         /* Handle any database specific initialization code to run. */
         switch ($this->_db->adapterName()) {
-        case 'PDO_Oci':
-            $query = "ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS'";
-            $this->_db->select($query);
-            break;
+            case 'PDO_Oci':
+                $query = "ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS'";
+                $this->_db->select($query);
+                break;
 
-        case 'PDO_PostgreSQL':
-            $query = "SET datestyle TO 'iso'";
-            $this->_db->select($query);
-            break;
+            case 'PDO_PostgreSQL':
+                $query = "SET datestyle TO 'iso'";
+                $this->_db->select($query);
+                break;
         }
     }
 

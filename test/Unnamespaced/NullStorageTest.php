@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -6,10 +7,15 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
+
 use Horde_Alarm_Null;
 use Horde_Alarm_Exception;
 
+/**
+ * @coversNothing
+ */
 class NullStorageTest extends StorageTestBase
 {
     public function testFactory()
@@ -49,12 +55,12 @@ class NullStorageTest extends StorageTestBase
     public function testListAlarms()
     {
         self::$date->min--;
-        self::$alarm->set(array('id' => 'publicalarm',
-                                'start' => self::$date,
-                                'end' => self::$end,
-                                'methods' => array(),
-                                'params' => array(),
-                                'title' => 'This is a public alarm.'));
+        self::$alarm->set(['id' => 'publicalarm',
+            'start' => self::$date,
+            'end' => self::$end,
+            'methods' => [],
+            'params' => [],
+            'title' => 'This is a public alarm.']);
         $list = self::$alarm->listAlarms('john');
         $this->assertEquals(0, count($list));
     }
@@ -82,12 +88,12 @@ class NullStorageTest extends StorageTestBase
      */
     public function testAlarmWithoutEnd()
     {
-        self::$alarm->set(array('id' => 'noend',
-                                'user' => 'john',
-                                'start' => self::$date,
-                                'methods' => array('notify'),
-                                'params' => array(),
-                                'title' => 'This is an alarm without end.'));
+        self::$alarm->set(['id' => 'noend',
+            'user' => 'john',
+            'start' => self::$date,
+            'methods' => ['notify'],
+            'params' => [],
+            'title' => 'This is an alarm without end.']);
         $list = self::$alarm->listAlarms('john', self::$end);
         $this->assertEquals(0, count($list));
     }

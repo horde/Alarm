@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Jan Schneider <jan@horde.org>
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
@@ -6,8 +7,12 @@
  * @package    Alarm
  * @subpackage UnitTests
  */
+
 namespace Horde\Alarm\Test\Unnamespaced;
 
+/**
+ * @coversNothing
+ */
 class Oci8StorageTest extends SqlStorageTestBase
 {
     public static function setUpBeforeClass(): void
@@ -16,8 +21,10 @@ class Oci8StorageTest extends SqlStorageTestBase
             self::$reason = 'No oci8 extension';
             return;
         }
-        $config = self::getConfig('ALARM_SQL_OCI8_TEST_CONFIG',
-                                  __DIR__ . '/../..');
+        $config = self::getConfig(
+            'ALARM_SQL_OCI8_TEST_CONFIG',
+            __DIR__ . '/../..'
+        );
         if ($config && !empty($config['alarm']['sql']['oci8'])) {
             self::$db = new Horde_Db_Adapter_Oci8($config['alarm']['sql']['oci8']);
             parent::setUpBeforeClass();
