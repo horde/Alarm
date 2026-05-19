@@ -13,6 +13,7 @@ namespace Horde\Alarm\Test\Unnamespaced;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Db_Adapter_Pdo_Sqlite;
+use Exception;
 
 #[CoversNothing]
 class PdoSqliteStorageTest extends SqlStorageTestBase
@@ -22,10 +23,10 @@ class PdoSqliteStorageTest extends SqlStorageTestBase
         try {
             self::$db = new Horde_Db_Adapter_Pdo_Sqlite([
                 'dbname' => ':memory:',
-                'charset' => 'utf-8'
+                'charset' => 'utf-8',
             ]);
             parent::setUpBeforeClass();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             self::$reason = 'Sqlite not available: ' . $e->getMessage();
         }
     }

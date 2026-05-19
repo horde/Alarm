@@ -27,6 +27,7 @@ use Horde_Date;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 #[CoversClass(AlarmManager::class)]
 class AlarmManagerTest extends TestCase
@@ -70,17 +71,24 @@ class AlarmManagerTest extends TestCase
     {
         $handlerCalled = false;
 
-        $handler = new class(function() use (&$handlerCalled) {
+        $handler = new class (function () use (&$handlerCalled) {
             $handlerCalled = true;
         }) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $callback) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->callback)();
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         };
 
         $this->manager->addHandler($handler);
@@ -126,15 +134,22 @@ class AlarmManagerTest extends TestCase
         $listener = function (AlarmTriggeredEvent $event) {
             $this->dispatchedEvents[] = $event;
         };
-        $this->manager->addHandler(new class($listener) implements \Horde\Alarm\HandlerInterface {
+        $this->manager->addHandler(new class ($listener) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $listener) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->listener)($event);
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         });
 
         // Create active alarm
@@ -160,15 +175,22 @@ class AlarmManagerTest extends TestCase
         $listener = function (AlarmTriggeredEvent $event) {
             $this->dispatchedEvents[] = $event;
         };
-        $this->manager->addHandler(new class($listener) implements \Horde\Alarm\HandlerInterface {
+        $this->manager->addHandler(new class ($listener) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $listener) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->listener)($event);
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         });
 
         // Create alarm that's already active
@@ -191,15 +213,22 @@ class AlarmManagerTest extends TestCase
         $listener = function (AlarmTriggeredEvent $event) {
             $this->dispatchedEvents[] = $event;
         };
-        $this->manager->addHandler(new class($listener) implements \Horde\Alarm\HandlerInterface {
+        $this->manager->addHandler(new class ($listener) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $listener) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->listener)($event);
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         });
 
         $this->storage->set(new AlarmConfig(
@@ -231,15 +260,22 @@ class AlarmManagerTest extends TestCase
             $eventDispatched = true;
             $this->dispatchedEvents[] = $event;
         };
-        $this->manager->addHandler(new class($listener) implements \Horde\Alarm\HandlerInterface {
+        $this->manager->addHandler(new class ($listener) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $listener) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->listener)($event);
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         });
 
         $this->storage->set(new AlarmConfig(
@@ -284,7 +320,7 @@ class AlarmManagerTest extends TestCase
             ->with('Alarm loader failed', $this->anything());
 
         $loader = function () {
-            throw new \RuntimeException('Loader failed');
+            throw new RuntimeException('Loader failed');
         };
 
         $manager = new AlarmManager($this->storage, logger: $logger, loader: $loader);
@@ -302,7 +338,7 @@ class AlarmManagerTest extends TestCase
 
         $storage = $this->createMock(\Horde\Alarm\StorageInterface::class);
         $storage->method('listAlarms')
-            ->willThrowException(new \RuntimeException('Storage failed'));
+            ->willThrowException(new RuntimeException('Storage failed'));
 
         $manager = new AlarmManager($storage, logger: $logger);
 
@@ -316,7 +352,7 @@ class AlarmManagerTest extends TestCase
 
         // First listener throws exception
         $listenerProvider->addListener(function (AlarmTriggeredEvent $event) {
-            throw new \RuntimeException('Handler failed');
+            throw new RuntimeException('Handler failed');
         });
 
         $this->storage->set(new AlarmConfig(
@@ -331,7 +367,7 @@ class AlarmManagerTest extends TestCase
         $manager = new AlarmManager($this->storage, $dispatcher);
 
         // With the throwing listener, this will throw and only process first alarm
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $manager->notify('john', new Horde_Date('2026-04-01 14:05:00'));
     }
 
@@ -341,32 +377,46 @@ class AlarmManagerTest extends TestCase
         $secondListenerCalled = false;
 
         // First listener stops propagation
-        $this->manager->addHandler(new class(function() use (&$firstListenerCalled) {
+        $this->manager->addHandler(new class (function () use (&$firstListenerCalled) {
             $firstListenerCalled = true;
         }) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $callback) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->callback)();
                 $event->stopPropagation();
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         });
 
         // Second listener should not receive event
-        $this->manager->addHandler(new class(function() use (&$secondListenerCalled) {
+        $this->manager->addHandler(new class (function () use (&$secondListenerCalled) {
             $secondListenerCalled = true;
         }) implements \Horde\Alarm\HandlerInterface {
             public function __construct(private $callback) {}
-            public function __invoke(\Horde\Alarm\AlarmTriggeredEvent $event): void {
+            public function __invoke(AlarmTriggeredEvent $event): void
+            {
                 ($this->callback)();
             }
-            public function notify(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function reset(\Horde\Alarm\AlarmConfig $alarm): void {}
-            public function getDescription(): string { return ''; }
-            public function getParameters(): array { return []; }
+            public function notify(AlarmConfig $alarm): void {}
+            public function reset(AlarmConfig $alarm): void {}
+            public function getDescription(): string
+            {
+                return '';
+            }
+            public function getParameters(): array
+            {
+                return [];
+            }
         });
 
         $this->storage->set(new AlarmConfig(

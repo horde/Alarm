@@ -20,6 +20,7 @@ use Horde\Alarm\AlarmConfig;
 use Horde\Alarm\AlarmTriggeredEvent;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Horde_Date;
 
 #[CoversClass(AlarmTriggeredEvent::class)]
 class AlarmTriggeredEventTest extends TestCase
@@ -31,7 +32,7 @@ class AlarmTriggeredEventTest extends TestCase
         $this->alarm = new AlarmConfig(
             id: 'test-alarm',
             user: 'john',
-            start: new \Horde_Date('2026-04-01 14:00:00'),
+            start: new Horde_Date('2026-04-01 14:00:00'),
             title: 'Test Alarm',
         );
     }
