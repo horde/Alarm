@@ -37,8 +37,7 @@ class HandlerParameter
         public readonly string $type,
         public readonly string $description,
         public readonly bool $required = false,
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a HandlerParameter from legacy array structure.

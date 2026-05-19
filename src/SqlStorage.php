@@ -23,6 +23,7 @@ use Horde\Db\Adapter;
 use Horde\Db\Exception as DbException;
 use Horde\Db\Value\Text as DbText;
 use Horde_Alarm_Translation;
+use Exception;
 
 /**
  * SQL alarm storage backend using Horde Db.
@@ -393,7 +394,7 @@ class SqlStorage implements StorageInterface
         }
         try {
             $params = @unserialize($params);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $params = [];
         }
         if (!is_array($params)) {
@@ -405,7 +406,7 @@ class SqlStorage implements StorageInterface
         if (!empty($row['alarm_internal'])) {
             try {
                 $internal = @unserialize($row['alarm_internal']);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
             }
             if (!is_array($internal)) {
                 $internal = [];
@@ -424,7 +425,7 @@ class SqlStorage implements StorageInterface
             start: new Horde_Date($row['alarm_start'], 'UTC'),
             end: !empty($row['alarm_end']) ? new Horde_Date($row['alarm_end'], 'UTC') : null,
             methods: array_map(
-                fn(string $method) => \Horde\Alarm\NotificationMethod::from($method),
+                fn(string $method) => NotificationMethod::from($method),
                 $methods
             ),
             params: $params,

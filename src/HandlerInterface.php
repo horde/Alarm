@@ -32,7 +32,7 @@ interface HandlerInterface
      * Notifies about an alarm.
      *
      * @param AlarmConfig $alarm The alarm to notify about
-     * @throws \Horde\Alarm\Exception\AlarmException
+     * @throws Exception\AlarmException
      */
     public function notify(AlarmConfig $alarm): void;
 

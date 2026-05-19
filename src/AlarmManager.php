@@ -23,6 +23,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Horde\EventDispatcher\EventDispatcher;
 use Horde\EventDispatcher\SimpleListenerProvider;
+use Throwable;
 
 /**
  * Alarm manager that orchestrates alarm notifications using PSR-14 event dispatching.
@@ -111,7 +112,7 @@ class AlarmManager
         if ($this->loader !== null) {
             try {
                 ($this->loader)($user, $time);
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 $this->logger->error('Alarm loader failed', [
                     'user' => $user,
                     'error' => $e->getMessage(),
@@ -128,7 +129,7 @@ class AlarmManager
         // Fetch active alarms
         try {
             $alarms = $this->storage->listAlarms($user, $time);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->error('Failed to list alarms', [
                 'user' => $user,
                 'time' => $time->format('Y-m-d H:i:s'),

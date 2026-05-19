@@ -19,6 +19,8 @@ namespace Horde\Alarm;
 use Horde\Alarm\AlarmConfig;
 use Horde\Alarm\AlarmException;
 use Horde_Notification_Handler;
+use Horde_Alarm_Translation;
+use Throwable;
 
 /**
  * Inline notification handler using Horde_Notification system.
@@ -67,7 +69,7 @@ class NotifyHandler implements HandlerInterface
 
         try {
             $this->sendNotification($event->alarm);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger?->error('Notify handler failed', [
                 'alarm_id' => $event->alarm->id,
                 'user' => $event->alarm->user,
@@ -117,7 +119,7 @@ class NotifyHandler implements HandlerInterface
 
     public function getDescription(): string
     {
-        return \Horde_Alarm_Translation::t("Inline");
+        return Horde_Alarm_Translation::t("Inline");
     }
 
     public function getParameters(): array
@@ -125,7 +127,7 @@ class NotifyHandler implements HandlerInterface
         return [
             'sound' => new HandlerParameter(
                 type: 'sound',
-                description: \Horde_Alarm_Translation::t("Play a sound?"),
+                description: Horde_Alarm_Translation::t("Play a sound?"),
                 required: false,
             ),
         ];

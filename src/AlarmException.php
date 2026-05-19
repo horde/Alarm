@@ -26,6 +26,4 @@ use Horde\Exception\Wrapped;
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package    Alarm
  */
-class AlarmException extends Wrapped
-{
-}
+class AlarmException extends Wrapped {}

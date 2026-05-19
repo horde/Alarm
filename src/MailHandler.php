@@ -22,6 +22,8 @@ use Horde\Alarm\StorageInterface;
 use Horde_Mime_Mail;
 use Horde_Mail_Transport;
 use Horde_Mime_Exception;
+use Horde_Alarm_Translation;
+use Throwable;
 
 /**
  * Email notification handler.
@@ -69,7 +71,7 @@ class MailHandler implements HandlerInterface
 
         try {
             $this->sendMail($event->alarm);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger?->error('Mail handler failed', [
                 'alarm_id' => $event->alarm->id,
                 'user' => $event->alarm->user,
@@ -147,7 +149,7 @@ class MailHandler implements HandlerInterface
 
     public function getDescription(): string
     {
-        return \Horde_Alarm_Translation::t("Email");
+        return Horde_Alarm_Translation::t("Email");
     }
 
     public function getParameters(): array
@@ -155,7 +157,7 @@ class MailHandler implements HandlerInterface
         return [
             'email' => new HandlerParameter(
                 type: 'text',
-                description: \Horde_Alarm_Translation::t("Email address (optional)"),
+                description: Horde_Alarm_Translation::t("Email address (optional)"),
                 required: false,
             ),
         ];

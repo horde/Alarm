@@ -19,6 +19,8 @@ namespace Horde\Alarm;
 use Horde\Alarm\AlarmConfig;
 use Horde\Alarm\AlarmException;
 use Horde\Serialize\Serializer;
+use Horde_Alarm_Translation;
+use Throwable;
 
 /**
  * Desktop notification handler for webkit browsers.
@@ -64,7 +66,7 @@ class DesktopHandler implements HandlerInterface
 
         try {
             $this->sendDesktopNotification($event->alarm);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger?->error('Desktop handler failed', [
                 'alarm_id' => $event->alarm->id,
                 'user' => $event->alarm->user,
@@ -113,7 +115,7 @@ class DesktopHandler implements HandlerInterface
 
     public function getDescription(): string
     {
-        return \Horde_Alarm_Translation::t("Desktop notification (with certain browsers)");
+        return Horde_Alarm_Translation::t("Desktop notification (with certain browsers)");
     }
 
     public function getParameters(): array

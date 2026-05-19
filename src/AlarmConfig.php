@@ -55,8 +55,7 @@ class AlarmConfig
         public readonly ?Horde_Date $snooze = null,
         public readonly array $internal = [],
         public readonly ?string $instanceId = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Creates an AlarmConfig from a legacy array structure.
