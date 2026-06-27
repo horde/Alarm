@@ -8,8 +8,7 @@ list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_Alarm
 authors:
-  -
-    name: Jan Schneider
+  - name: Jan Schneider
     user: jan
     email: jan@horde.org
     active: true
@@ -51,3 +50,140 @@ dependencies:
       phpstan/phpstan: ^2
       friendsofphp/php-cs-fixer: ^3
 vendor: horde
+keywords: null
+ci-platform:
+  '8.0':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.1':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.2':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.3':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.4':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.5':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.6':
+    - php: ^8.1
+    - composer-plugin-api: ^2.2.0
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-gettext
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-pcre
+    - ext-phar
+    - ext-simplexml
+    - ext-spl
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+ci-platform-flags:
+  needs_installer_plugin: true
